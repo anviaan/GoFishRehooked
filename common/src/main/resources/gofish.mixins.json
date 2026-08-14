@@ -5,13 +5,21 @@
     "refmap": "${mod_id}.refmap.json",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
+        "FishingBobberAutosmeltMixin",
+        "FishingBobberEntityAccessor",
+        "FishingBobberExperienceMixin",
+        "FishingBobberFireproofMixin",
+        "FishingBobberLavaFishingMixin",
+        "FishingBobberLootMixin",
+        "FishingBobberValidityMixin",
+        "FishingHookPredicateMixin",
+        "FishingRodPropertyMixin",
+        "ItemEntityFireproofMixin",
+        "LootPoolAccessor",
+        "LootTableAccessor"
     ],
-    "client": [
-    ],
-    "server": [
-    ],
+    "client": [],
     "injectors": {
         "defaultRequire": 1
     }
 }
-

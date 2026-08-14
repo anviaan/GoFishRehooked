@@ -8,6 +8,15 @@ base {
     archivesName = "${mod_name}-neoforge-${minecraft_version}"
 }
 
+// NeoForge Gradle unpacks userdev inputs during configuration; keep that cache
+// available when the root clean task is followed by a build in the same run.
+tasks.named("clean") {
+    setDelete(project.fileTree(project.layout.buildDirectory) {
+        exclude("neoForge/**")
+        exclude("neoForm/**")
+    })
+}
+
 if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
     minecraft.accessTransformers.file file('src/main/resources/META-INF/accesstransformer.cfg')
 }

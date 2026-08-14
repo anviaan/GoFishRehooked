@@ -7,11 +7,9 @@
     "mixins": [
     ],
     "client": [
-    ],
-    "server": [
+        "FishingBobberEntityRendererMixin"
     ],
     "injectors": {
-      "defaultRequire": 1
+        "defaultRequire": 1
     }
-  }
-  
+}

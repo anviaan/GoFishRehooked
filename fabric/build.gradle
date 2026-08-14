@@ -23,7 +23,6 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     implementation "com.google.code.findbugs:jsr305:3.0.1"
-    localRuntime("com.terraformersmc:modmenu:8.0.1")
     modImplementation "net.anvian.anvianslib:anvianslib-fabric-1.20:${anvianslib_version}"
     implementation project(":common")
 }

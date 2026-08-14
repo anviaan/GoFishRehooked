@@ -11,7 +11,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.dimension.DimensionType;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
@@ -49,7 +48,7 @@ public class FishCommand {
         } else if (!dimension.bedWorks()) {
             table = world.getServer().getLootData().getLootTable(GoFishLootTables.END_FISHING);
         } else {
-            table = world.getServer().getLootData().getLootTable(BuiltInLootTables.FISHING);
+            table = world.getServer().getLootData().getLootTable(GoFishLootTables.OVERWORLD_FISHING);
         }
 
         for (int z = 0; z < times; z++) {

@@ -40,7 +40,8 @@ public class CrateItem extends BlockItem {
         Player player = context.getPlayer();
 
         if (player != null && player.isShiftKeyDown()) {
-            return InteractionResult.FAIL;
+            openCrate(context.getLevel(), player, context.getHand());
+            return InteractionResult.sidedSuccess(context.getLevel().isClientSide);
         }
 
         return super.useOn(context);
@@ -50,20 +51,22 @@ public class CrateItem extends BlockItem {
     public @NotNull InteractionResultHolder<ItemStack> use(
             @NotNull Level world, Player user, @NotNull InteractionHand hand) {
         if (user.isShiftKeyDown()) {
-            if (!world.isClientSide) {
-                getDrops((ServerLevel) world, loot, user.position())
-                        .forEach(
-                                stack -> Containers.dropItemStack(world, user.getX(), user.getY(), user.getZ(), stack));
-            }
-
-            if (!user.isCreative()) {
-                user.getItemInHand(hand).shrink(1);
-            }
-
+            openCrate(world, user, hand);
             return InteractionResultHolder.success(user.getItemInHand(hand));
         }
 
         return super.use(world, user, hand);
+    }
+
+    private void openCrate(Level world, Player user, InteractionHand hand) {
+        if (!world.isClientSide) {
+            getDrops((ServerLevel) world, loot, user.position())
+                    .forEach(stack -> Containers.dropItemStack(world, user.getX(), user.getY(), user.getZ(), stack));
+
+            if (!user.isCreative()) {
+                user.getItemInHand(hand).shrink(1);
+            }
+        }
     }
 
     private List<ItemStack> getDrops(ServerLevel world, ResourceLocation identifier, Vec3 pos) {

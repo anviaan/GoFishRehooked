@@ -1,6 +1,6 @@
 {
   "itemGroup.gofish.group": "Go Fish",
-  "gofish.crate_tooltip": "Shiftキーを押しながらクリックして開いてください。",
+  "gofish.crate_tooltip": "空中またはブロックを見ながらしゃがんで使用すると開きます。",
   "enchantment.gofish.deepfry": "Deepfry",
   "item.gofish.spikerfish": "スパイカーフィッシュ",
   "item.gofish.smokey_salmon": "スモーキーサーモン",

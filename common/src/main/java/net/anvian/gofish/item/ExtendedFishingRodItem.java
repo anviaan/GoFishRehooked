@@ -2,7 +2,6 @@ package net.anvian.gofish.item;
 
 import net.anvian.gofish.api.ExperienceBobber;
 import net.anvian.gofish.api.FireproofEntity;
-import net.anvian.gofish.api.FishingBonus;
 import net.anvian.gofish.api.SmeltingBobber;
 import net.anvian.gofish.api.SoundInstance;
 import net.anvian.gofish.registry.GoFishEnchantments;
@@ -25,7 +24,6 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExtendedFishingRodItem extends FishingRodItem {
@@ -97,42 +95,20 @@ public class ExtendedFishingRodItem extends FishingRodItem {
     }
 
     private void spawnBobber(Level world, Player user, ItemStack heldStack) {
-        BonusAccumulator bonuses = collectInventoryBonuses(world, user);
+        FishingBonusCalculator.Bonuses bonuses =
+                FishingBonusCalculator.collect(world, user, config.nightLuck);
 
-        boolean smelts = shouldSmelt(heldStack, bonuses.smeltBuff);
+        boolean smelts = shouldSmelt(heldStack, bonuses.smeltBuff());
 
         int lure = Math.min(
-                EnchantmentHelper.getFishingSpeedBonus(heldStack) + config.baseLure + bonuses.bonusLure, 5);
-        int lots = EnchantmentHelper.getFishingLuckBonus(heldStack) + config.baseLOTS + bonuses.bonusLuck;
+                EnchantmentHelper.getFishingSpeedBonus(heldStack) + config.baseLure + bonuses.lure(), 5);
+        int lots = EnchantmentHelper.getFishingLuckBonus(heldStack) + config.baseLOTS + bonuses.luck();
 
         FishingHook bobber = new FishingHook(user, world, lots, lure);
         world.addFreshEntity(bobber);
         ((FireproofEntity) bobber).gfSetFireproof(config.lavaProof);
         ((SmeltingBobber) bobber).gfSetSmelts(smelts);
-        ((ExperienceBobber) bobber).gfSetBaseExperience(config.baseExperience + bonuses.bonusExperience);
-    }
-
-    private BonusAccumulator collectInventoryBonuses(Level world, Player user) {
-        BonusAccumulator acc = new BonusAccumulator();
-
-        if (config.nightLuck && user.level().isNight()) {
-            acc.bonusLuck++;
-        }
-
-        List<FishingBonus> found = new ArrayList<>();
-        for (ItemStack stack : user.getInventory().items) {
-            if (stack.getItem() instanceof FishingBonus bonus
-                    && !found.contains(bonus)
-                    && bonus.shouldApply(world, user)) {
-                found.add(bonus);
-                acc.smeltBuff = bonus.providesAutoSmelt() || acc.smeltBuff;
-                acc.bonusLure += bonus.getLure();
-                acc.bonusLuck += bonus.getLuckOfTheSea();
-                acc.bonusExperience += bonus.getBaseExperience();
-            }
-        }
-
-        return acc;
+        ((ExperienceBobber) bobber).gfSetBaseExperience(config.baseExperience + bonuses.experience());
     }
 
     private boolean shouldSmelt(ItemStack heldStack, boolean smeltBuff) {
@@ -180,13 +156,6 @@ public class ExtendedFishingRodItem extends FishingRodItem {
 
     public boolean canFishInLava() {
         return config.lavaProof;
-    }
-
-    private static class BonusAccumulator {
-        boolean smeltBuff;
-        int bonusLure;
-        int bonusLuck;
-        int bonusExperience;
     }
 
     public static class Builder {

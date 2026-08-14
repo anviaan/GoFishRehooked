@@ -1,5 +1,6 @@
 package net.anvian.gofish.mixin;
 
+import net.anvian.gofish.GoFish;
 import net.anvian.gofish.api.FireproofEntity;
 import net.anvian.gofish.impl.GoFishLootTables;
 import net.minecraft.resources.ResourceLocation;
@@ -7,6 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.FishingHook;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
@@ -33,6 +35,11 @@ public abstract class FishingBobberLootMixin extends Entity {
     private LootTable getTable(LootDataManager lootManager, ResourceLocation id) {
         assert level().getServer() != null;
 
+        Entity owner = ((FishingHook) (Object) this).getOwner();
+        if (!(owner instanceof ServerPlayer) || GoFish.isFakePlayer(owner)) {
+            return level().getServer().getLootData().getLootTable(BuiltInLootTables.FISHING);
+        }
+
         final DimensionType dimension = level().dimensionType();
         if (dimension.ultraWarm()) {
             return this.level().getServer().getLootData().getLootTable(GoFishLootTables.NETHER_FISHING);
@@ -40,7 +47,7 @@ public abstract class FishingBobberLootMixin extends Entity {
             return this.level().getServer().getLootData().getLootTable(GoFishLootTables.END_FISHING);
         }
 
-        return this.level().getServer().getLootData().getLootTable(BuiltInLootTables.FISHING);
+        return this.level().getServer().getLootData().getLootTable(GoFishLootTables.OVERWORLD_FISHING);
     }
 
     @Redirect(

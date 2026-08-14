@@ -1,7 +1,7 @@
 {
   "itemGroup.gofish.group": "Go Fish",
 
-  "gofish.crate_tooltip": "Shift-click to open.",
+  "gofish.crate_tooltip": "Sneak-use while looking at air or a block to open.",
   "enchantment.gofish.deepfry": "Deepfry",
 
   "item.gofish.spikerfish": "Spikerfish",

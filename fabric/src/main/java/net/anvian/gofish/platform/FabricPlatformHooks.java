@@ -8,10 +8,12 @@ import net.anvian.gofish.registry.GoFishEntities;
 import net.anvian.gofish.registry.GoFishItems;
 import net.anvian.gofish.registry.GoFishLootHandler;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.entity.FakePlayer;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
@@ -61,6 +63,11 @@ public final class FabricPlatformHooks implements IPlatformHooks {
     @Override
     public Item createCrateItem(Block block, Item.Properties properties, ResourceLocation lootTable) {
         return new CrateItem(block, properties, lootTable);
+    }
+
+    @Override
+    public boolean isFakePlayer(Entity entity) {
+        return entity instanceof FakePlayer || entity.getClass().getName().contains("FakePlayer");
     }
 
     @Override

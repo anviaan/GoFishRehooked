@@ -1,6 +1,6 @@
 {
   "itemGroup.gofish.group": "Go Fish",
-  "gofish.crate_tooltip": "Clicca tenendo premuto il tasto Maiusc per aprire.",
+  "gofish.crate_tooltip": "Usa l’oggetto tenendo premuto Shift e mirando all’aria o a un blocco per aprirlo.",
   "enchantment.gofish.deepfry": "Deepfry",
   "item.gofish.spikerfish": "Spikerfish",
   "item.gofish.smokey_salmon": "Salmone affumicato",

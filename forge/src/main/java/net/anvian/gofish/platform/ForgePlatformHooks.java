@@ -13,6 +13,7 @@ import net.anvian.gofish.registry.GoFishLootHandler;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -143,6 +144,11 @@ public final class ForgePlatformHooks implements IPlatformHooks {
         return block instanceof AstralCrateBlock
                 ? new ForgeAstralCrateItem(block, properties, lootTable)
                 : new CrateItem(block, properties, lootTable);
+    }
+
+    @Override
+    public boolean isFakePlayer(Entity entity) {
+        return entity.getClass().getName().contains("FakePlayer");
     }
 
     private record Registration(

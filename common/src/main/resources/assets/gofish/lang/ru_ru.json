@@ -1,6 +1,6 @@
 {
   "itemGroup.gofish.group": "Go Fish",
-  "gofish.crate_tooltip": "Нажмите Shift+щелчок, чтобы открыть.",
+  "gofish.crate_tooltip": "Присядьте и используйте предмет, глядя на воздух или блок, чтобы открыть его.",
   "enchantment.gofish.deepfry": "Deepfry",
   "item.gofish.spikerfish": "Spikerfish",
   "item.gofish.smokey_salmon": "Копчёный лосось",

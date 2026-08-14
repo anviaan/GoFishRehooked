@@ -1,6 +1,6 @@
 {
   "itemGroup.gofish.group": "Go Fish",
-  "gofish.crate_tooltip": "Shift 키를 누른 채 클릭하여 열 수 있습니다.",
+  "gofish.crate_tooltip": "공기나 블록을 바라보며 웅크리고 사용하면 열립니다.",
   "enchantment.gofish.deepfry": "Deepfry",
   "item.gofish.spikerfish": "Spikerfish",
   "item.gofish.smokey_salmon": "스모키 연어",

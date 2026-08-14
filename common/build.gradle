@@ -30,6 +30,7 @@ dependencies {
     compileOnly "org.spongepowered:mixin:0.8.5"
     implementation "com.google.code.findbugs:jsr305:3.0.1"
     implementation "net.anvian.anvianslib:anvianslib-common-1.20:${anvianslib_version}"
+    testImplementation "junit:junit:4.13.2"
 }
 
 publishing {

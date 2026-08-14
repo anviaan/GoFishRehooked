@@ -42,7 +42,7 @@ public record MatchBiomeLootCondition(Optional<BiomeTagPredicate> category, Opti
 
     @Override
     public @NotNull Set<LootContextParam<?>> getReferencedContextParams() {
-        return ImmutableSet.of();
+        return ImmutableSet.of(LootContextParams.ORIGIN);
     }
 
     @Override

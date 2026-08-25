@@ -44,7 +44,7 @@ public abstract class FishingBobberAutosmeltMixin extends Entity implements Smel
                             value = "INVOKE",
                             target = "Lnet/minecraft/world/entity/item/ItemEntity;setDeltaMovement(DDD)V",
                             shift = At.Shift.AFTER),
-            name = "itemEntity")
+            ordinal = 0)
     private ItemEntity processOutput(ItemEntity itemEntity) {
         if (gfSmelts) {
             Optional<RecipeHolder<SmeltingRecipe>> cooked = level().getRecipeManager()

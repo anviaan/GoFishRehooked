@@ -58,12 +58,6 @@ The Overworld includes vanilla junk, treasure, and fish categories, plus Go Fish
 | Snow                    | Blizzard Bass                                               |
 | Y level 150 or higher   | Cloudy Crab                                                 |
 
-<div align="center">
-
-_Screenshot placeholder — Show a catch affected by a biome, weather, full-moon, or high-altitude condition._
-
-</div>
-
 ### Nether
 
 Lava is a valid liquid for Go Fish fishing. Only lava-proof rods can safely fish in lava. Nether catches are protected

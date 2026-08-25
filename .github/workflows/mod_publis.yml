@@ -18,9 +18,6 @@ jobs:
       game_versions: ${{ steps.gradle-env.outputs.game_versions }}
 
     steps:
-      - name: Check Environment Variables
-        run: env
-
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
@@ -51,6 +48,12 @@ jobs:
         with:
           name: fabric-jar
           path: fabric/build/libs/
+
+      - name: Upload Forge JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: forge-jar
+          path: 'forge/build/libs/!(*-@(dev|sources|javadoc|shadow)).jar'
 
       - name: Upload NeoForge JAR
         uses: actions/upload-artifact@v4

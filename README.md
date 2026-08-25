@@ -36,8 +36,7 @@ fishing location and current conditions determine which catches can be selected.
 
 <div align="center">
 
-_Screenshot placeholder — Show a player fishing in an Overworld biome, with the fishing rod, hook, and a newly caught
-custom fish visible._
+![Fishing Overview](https://cdn.modrinth.com/data/nGvPJWKu/images/c04bcb99ab5fdd7655853bae47afdcb962899c5d.png)
 
 </div>
 
@@ -101,8 +100,7 @@ worn, and each distinct bonus item type is counted once.
 
 <div align="center">
 
-_Screenshot placeholder — Show several extended rods together, highlighting their different designs and special
-properties._
+![Extended Fishing Rods](https://cdn.modrinth.com/data/nGvPJWKu/images/31ba9ade7237ce6ad36070de3b913a754f2561d0.png)
 
 </div>
 
@@ -128,8 +126,7 @@ their own loot tables.
 
 <div align="center">
 
-_Screenshot placeholder — Show a selection of crates from different locations, such as a Wooden Crate, Golden Crate,
-Astral Crate, or End Crate._
+![Crates](https://cdn.modrinth.com/data/nGvPJWKu/images/572e2aba9d70cf120d98d40394df4efad59042d3.png)
 
 </div>
 
@@ -164,8 +161,8 @@ Many catches are edible, while others are crafting ingredients or direct sources
 
 <div align="center">
 
-_Screenshot placeholder — Show the fish collection or a group of prepared foods, with the most unusual fish effects
-represented._
+![Fish and Food 1](https://cdn.modrinth.com/data/nGvPJWKu/images/7b62cd213b16c27ee7c7416b3c25e4f747581805.png)
+![Fish and Food 2](https://cdn.modrinth.com/data/nGvPJWKu/images/23e637d67e577759eed24bc0c7c8c0a4b5467099.png)
 
 </div>
 
@@ -206,8 +203,7 @@ Go Fish Rehooked uses standard Minecraft crafting and cooking stations.
 
 <div align="center">
 
-_Screenshot placeholder — Show a crafting or cooking setup for a rod, lure, custom meal, or fish-to-resource
-conversion._
+![Fishing Recipes](https://cdn.modrinth.com/data/nGvPJWKu/images/f515d6b5c356a401fde2478170f54ee81103ecd6.png)
 
 </div>
 

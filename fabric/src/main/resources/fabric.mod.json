@@ -21,7 +21,7 @@
     }
   },
   "license": "${license}",
-  "icon": "assets/${mod_id}/icon.png",
+  "icon": "${mod_id}.png",
   "environment": "*",
   "entrypoints": {
     "main": [

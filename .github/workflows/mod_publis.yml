@@ -33,12 +33,14 @@ jobs:
         run: chmod +x gradlew
 
       - name: Set Environment Variables from Gradle
+        run: ./gradlew printEnv
+
+      - name: Export Gradle outputs
         id: gradle-env
         run: |
-          ./gradlew printEnv
-          echo "mod_version=$MOD_VERSION"       >> $GITHUB_OUTPUT
-          echo "release_name=$RELEASE_NAME"     >> $GITHUB_OUTPUT
-          echo "game_versions=$GAME_VERSIONS"   >> $GITHUB_OUTPUT
+          echo "mod_version=$MOD_VERSION"     >> "$GITHUB_OUTPUT"
+          echo "release_name=$RELEASE_NAME"   >> "$GITHUB_OUTPUT"
+          echo "game_versions=$GAME_VERSIONS" >> "$GITHUB_OUTPUT"
 
       - name: Build
         run: ./gradlew build

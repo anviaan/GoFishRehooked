@@ -6,7 +6,7 @@ plugins {
 }
 
 base {
-    archivesName = "${mod_name}-fabric-${minecraft_version}"
+    archivesName = "${mod_id}-fabric-${minecraft_version}"
 }
 
 repositories {
@@ -15,7 +15,6 @@ repositories {
         url = "https://maven.terraformersmc.com/"
     }
 }
-
 
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"

@@ -7,7 +7,7 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod(GoFish.MOD_ID)
+@Mod(GoFishConstants.MOD_ID)
 public final class GoFishForge {
     public GoFishForge() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

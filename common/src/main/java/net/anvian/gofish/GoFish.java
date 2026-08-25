@@ -12,9 +12,7 @@ import net.anvian.gofish.registry.GoFishLoot;
 import net.anvian.gofish.registry.GoFishParticles;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.CreativeModeTab;
@@ -24,19 +22,18 @@ import net.minecraft.world.level.block.Block;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public final class GoFish {
 
-    public static final String MOD_ID = "gofish";
-    public static final String MOD_NAME = "Go Fish";
-    public static final String MOD_VERSION = "2.0.0";
-    public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
-    public static final ResourceKey<CreativeModeTab> ITEM_GROUP =
-            ResourceKey.create(Registries.CREATIVE_MODE_TAB, id("group"));
+    public static final Logger LOG = LoggerFactory.getLogger(GoFishConstants.MOD_NAME);
 
     private static IPlatformHooks platform;
     private static boolean initialized;
 
-    private GoFish() {}
+    private GoFish() {
+    }
 
     public static void init(IPlatformHooks hooks) {
         if (initialized) {
@@ -46,8 +43,9 @@ public final class GoFish {
         platform = hooks;
         initialized = true;
 
-        LOG.info("Initializing {} v{} on {}", MOD_ID, MOD_VERSION, Services.PLATFORM.getPlatformName());
-        LibUtil.setupTelemetry(MOD_ID, MOD_VERSION);
+        LOG.info("Initializing {} v{} on {}", GoFishConstants.MOD_ID, GoFishConstants.MOD_VERSION,
+                Services.PLATFORM.getPlatformName());
+        LibUtil.setupTelemetry(GoFishConstants.MOD_ID, GoFishConstants.MOD_VERSION);
 
         GoFishBlocks.init();
         GoFishItems.init();
@@ -58,21 +56,32 @@ public final class GoFish {
 
         register(
                 BuiltInRegistries.CREATIVE_MODE_TAB,
-                ITEM_GROUP.location(),
+                GoFishConstants.ITEM_GROUP.location(),
                 () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                         .icon(() -> new ItemStack(GoFishItems.GOLDEN_FISH.get()))
                         .title(Component.translatable("itemGroup.gofish.group"))
-                        .displayItems((parameters, output) -> BuiltInRegistries.ITEM.entrySet().stream()
-                                .filter(entry ->
-                                        MOD_ID.equals(entry.getKey().location().getNamespace()))
-                                .forEach(entry -> output.accept(entry.getValue())))
+                        .displayItems((parameters, output) -> {
+                            Set<ResourceLocation> orderedItems = new HashSet<>();
+
+                            GoFishConstants.CREATIVE_ITEM_ORDER.forEach(name -> {
+                                ResourceLocation itemId = id(name);
+                                output.accept(BuiltInRegistries.ITEM.get(itemId));
+                                orderedItems.add(itemId);
+                            });
+
+                            BuiltInRegistries.ITEM.entrySet().stream()
+                                    .filter(entry ->
+                                            GoFishConstants.MOD_ID.equals(entry.getKey().location().getNamespace()))
+                                    .filter(entry -> !orderedItems.contains(entry.getKey().location()))
+                                    .forEach(entry -> output.accept(entry.getValue()));
+                        })
                         .build());
 
         hooks.registerPlatformHooks();
     }
 
     public static ResourceLocation id(String name) {
-        return new ResourceLocation(MOD_ID, name);
+        return new ResourceLocation(GoFishConstants.MOD_ID, name);
     }
 
     public static Item createCrateItem(Block block, Item.Properties properties, ResourceLocation lootTable) {

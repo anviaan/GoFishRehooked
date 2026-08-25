@@ -6,7 +6,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLEnvironment;
 
-@Mod(GoFish.MOD_ID)
+@Mod(GoFishConstants.MOD_ID)
 public final class GoFishNeoForge {
     public GoFishNeoForge(IEventBus modEventBus) {
         GoFish.init(new NeoForgePlatformHooks(modEventBus));

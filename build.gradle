@@ -89,7 +89,13 @@ subprojects {
                 "neoforge_version"             : neoforge_version,
                 "neoforge_loader_version_range": neoforge_loader_version_range,
                 "credits"                      : credits,
-                "anvianslib_version"           : anvianslib_version
+                "anvianslib_version"           : anvianslib_version,
+                "display_url"                  : display_url,
+                "source_url"                   : source_url,
+                "issue_tracker_url"            : issue_tracker_url,
+                "modrinth_url"                 : modrinth_url,
+                "curseforge_url"               : curseforge_url,
+                "update_json_url"              : update_json_url
         ]
 
         filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', '*.mixins.json']) {

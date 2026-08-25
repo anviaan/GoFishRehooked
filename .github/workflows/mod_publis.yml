@@ -53,7 +53,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: forge-jar
-          path: 'forge/build/libs/!(*-@(dev|sources|javadoc|shadow)).jar'
+          path: forge/build/libs/
 
       - name: Upload NeoForge JAR
         uses: actions/upload-artifact@v4

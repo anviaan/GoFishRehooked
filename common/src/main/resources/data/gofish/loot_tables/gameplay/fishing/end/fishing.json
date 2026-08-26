@@ -19,7 +19,7 @@
           ],
           "weight": 5,
           "quality": 2,
-          "name": "gofish:gameplay/fishing/end/treasure"
+          "value": "gofish:gameplay/fishing/end/treasure"
         },
         {
           "type": "minecraft:loot_table",
@@ -36,13 +36,13 @@
           ],
           "weight": 5,
           "quality": 2,
-          "name": "gofish:gameplay/fishing/end/crates"
+          "value": "gofish:gameplay/fishing/end/crates"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 90,
           "quality": -1,
-          "name": "gofish:gameplay/fishing/end/fish"
+          "value": "gofish:gameplay/fishing/end/fish"
         }
       ]
     }

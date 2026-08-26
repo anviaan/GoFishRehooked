@@ -2,7 +2,7 @@
   "parent": "gofish:fishing/crate/wooden_crate",
   "display": {
     "icon": {
-      "item": "gofish:supply_crate"
+      "id": "gofish:supply_crate"
     },
     "title": {
       "translate": "advancements.fishing.supply_crate.title"

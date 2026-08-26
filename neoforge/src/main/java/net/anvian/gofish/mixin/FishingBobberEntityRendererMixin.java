@@ -34,7 +34,7 @@ public class FishingBobberEntityRendererMixin {
     @ModifyVariable(
             method = "render*",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;getAttackAnim(F)F"),
-            name = "i")
+            index = 6)
     private int modifyFishingRodAnimation(int light) {
         ItemStack itemStack = gofishOwner.getMainHandItem();
         return itemStack.getItem() != Items.FISHING_ROD && itemStack.getItem() instanceof ExtendedFishingRodItem

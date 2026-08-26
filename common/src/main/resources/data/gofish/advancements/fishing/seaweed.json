@@ -2,7 +2,7 @@
   "parent": "gofish:fishing/root",
   "display": {
     "icon": {
-      "item": "gofish:seaweed"
+      "id": "gofish:seaweed"
     },
     "title": {
       "translate": "advancements.fishing.seaweed.title"

@@ -3,7 +3,9 @@
   "ingredient": {
     "item": "gofish:oakfish"
   },
-  "result": "gofish:charfish",
+  "result": {
+    "id": "gofish:charfish"
+  },
   "experience": 1.25,
   "cookingtime": 400
 }

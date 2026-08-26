@@ -67,8 +67,7 @@ public abstract class FishingBobberLavaFishingMixin extends Entity {
         }
 
         if (!player.isCreative()) {
-            player.getItemInHand(InteractionHand.MAIN_HAND)
-                    .hurtAndBreak(5, player, brokenPlayer -> brokenPlayer.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+            player.getItemInHand(InteractionHand.MAIN_HAND).hurtAndBreak(5, player, EquipmentSlot.MAINHAND);
         }
 
         if (level() instanceof ServerLevel serverlevel) {

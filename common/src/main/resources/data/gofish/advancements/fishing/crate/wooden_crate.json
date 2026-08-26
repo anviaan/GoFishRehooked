@@ -2,7 +2,7 @@
   "parent": "gofish:fishing/root",
   "display": {
     "icon": {
-      "item": "gofish:wooden_crate"
+      "id": "gofish:wooden_crate"
     },
     "title": {
       "translate": "advancements.fishing.wooden_crate.title"

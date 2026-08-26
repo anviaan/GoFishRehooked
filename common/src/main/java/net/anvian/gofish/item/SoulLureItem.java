@@ -25,11 +25,17 @@ public class SoulLureItem extends Item implements FishingBonus {
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, Level world, @NotNull List<Component> tooltip, @NotNull TooltipFlag context) {
-        super.appendHoverText(stack, world, tooltip, context);
+    public void appendHoverText(
+            @NotNull ItemStack stack,
+            Item.@NotNull TooltipContext context,
+            @NotNull List<Component> tooltip,
+            @NotNull TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltip, flag);
 
-        tooltip.add(Component.translatable(String.format("gofish.lure.tooltip_%d", 1)).withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable(String.format("gofish.lots.tooltip_%d", 2), 1, " in Soul Sand Valley").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable(String.format("gofish.lure.tooltip_%d", 1))
+                .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable(String.format("gofish.lots.tooltip_%d", 2), 1, " in Soul Sand Valley")
+                .withStyle(ChatFormatting.GRAY));
     }
 
     @Override

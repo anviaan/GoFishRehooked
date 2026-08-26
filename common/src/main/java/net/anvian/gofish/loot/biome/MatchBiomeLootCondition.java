@@ -1,14 +1,13 @@
 package net.anvian.gofish.loot.biome;
 
 import com.google.common.collect.ImmutableSet;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.anvian.gofish.registry.GoFishLoot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
@@ -28,12 +27,13 @@ import java.util.Set;
 public record MatchBiomeLootCondition(Optional<BiomeTagPredicate> category, Optional<BiomePredicate> biome)
         implements LootItemCondition {
 
-    public static final Codec<MatchBiomeLootCondition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                    ExtraCodecs.strictOptionalField(BiomeTagPredicate.CODEC, "category")
-                            .forGetter(MatchBiomeLootCondition::category),
-                    ExtraCodecs.strictOptionalField(BiomePredicate.CODEC, "biome")
-                            .forGetter(MatchBiomeLootCondition::biome))
-            .apply(instance, MatchBiomeLootCondition::new));
+    public static final MapCodec<MatchBiomeLootCondition> CODEC =
+            RecordCodecBuilder.mapCodec(instance -> instance.group(
+                            BiomeTagPredicate.CODEC
+                                    .optionalFieldOf("category")
+                                    .forGetter(MatchBiomeLootCondition::category),
+                            BiomePredicate.CODEC.optionalFieldOf("biome").forGetter(MatchBiomeLootCondition::biome))
+                    .apply(instance, MatchBiomeLootCondition::new));
 
     @Override
     public @NotNull LootItemConditionType getType() {

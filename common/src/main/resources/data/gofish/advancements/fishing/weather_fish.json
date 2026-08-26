@@ -2,7 +2,7 @@
   "parent": "gofish:fishing/root",
   "display": {
     "icon": {
-      "item": "gofish:cloudy_crab"
+      "id": "gofish:cloudy_crab"
     },
     "title": {
       "translate": "advancements.fishing.weather_fish.title"

@@ -9,6 +9,6 @@
     }
   ],
   "result": {
-    "item": "minecraft:water_bucket"
+    "id": "minecraft:water_bucket"
   }
 }

@@ -21,63 +21,63 @@ public class GoFishBlocks {
 
     public static final PlatformRegistryObject<Block> WOODEN_CRATE = registerCrate(
             "wooden_crate",
-            () -> new CrateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)),
+            () -> new CrateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD)),
             new Item.Properties().stacksTo(8),
             GoFish.id("gameplay/fishing/wooden_crate"));
     public static final PlatformRegistryObject<Block> IRON_CRATE = registerCrate(
             "iron_crate",
-            () -> new CrateBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)),
+            () -> new CrateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)),
             new Item.Properties().stacksTo(8),
             GoFish.id("gameplay/fishing/iron_crate"));
     public static final PlatformRegistryObject<Block> GOLDEN_CRATE = registerCrate(
             "golden_crate",
-            () -> new CrateBlock(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK)),
+            () -> new CrateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GOLD_BLOCK)),
             new Item.Properties().stacksTo(8).rarity(Rarity.UNCOMMON),
             GoFish.id("gameplay/fishing/golden_crate"));
     public static final PlatformRegistryObject<Block> DIAMOND_CRATE = registerCrate(
             "diamond_crate",
-            () -> new CrateBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)),
+            () -> new CrateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK)),
             new Item.Properties().stacksTo(8).rarity(Rarity.RARE),
             GoFish.id("gameplay/fishing/diamond_crate"));
     public static final PlatformRegistryObject<Block> FROSTED_CRATE = registerCrate(
             "frosted_crate",
-            () -> new CrateBlock(BlockBehaviour.Properties.copy(Blocks.BLUE_ICE)),
+            () -> new CrateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BLUE_ICE)),
             new Item.Properties().stacksTo(8).rarity(Rarity.RARE),
             GoFish.id("gameplay/fishing/frosted_crate"));
     public static final PlatformRegistryObject<Block> SLIMEY_CRATE = registerCrate(
             "slimey_crate",
-            () -> new CrateBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK)),
+            () -> new CrateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SLIME_BLOCK)),
             new Item.Properties().stacksTo(8),
             GoFish.id("gameplay/fishing/slimey_crate"));
     public static final PlatformRegistryObject<Block> SUPPLY_CRATE = registerCrate(
             "supply_crate",
-            () -> new CrateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)),
+            () -> new CrateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD)),
             new Item.Properties().stacksTo(8),
             GoFish.id("gameplay/fishing/supply_crate"));
     public static final PlatformRegistryObject<Block> FIERY_CRATE = registerCrate(
             "fiery_crate",
-            () -> new CrateBlock(BlockBehaviour.Properties.copy(Blocks.NETHER_BRICKS)),
+            () -> new CrateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_BRICKS)),
             new Item.Properties().fireResistant().stacksTo(8),
             GoFish.id("gameplay/fishing/fiery_crate"));
     public static final PlatformRegistryObject<Block> SOUL_CRATE = registerCrate(
             "soul_crate",
-            () -> new CrateBlock(BlockBehaviour.Properties.copy(Blocks.STONE)),
+            () -> new CrateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)),
             new Item.Properties().fireResistant().stacksTo(8).rarity(Rarity.RARE),
             GoFish.id("gameplay/fishing/soul_crate"));
     public static final PlatformRegistryObject<Block> GILDED_BLACKSTONE_CRATE = registerCrate(
             "gilded_blackstone_crate",
-            () -> new CrateBlock(BlockBehaviour.Properties.copy(Blocks.GILDED_BLACKSTONE)),
+            () -> new CrateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GILDED_BLACKSTONE)),
             new Item.Properties().fireResistant().stacksTo(8).rarity(Rarity.UNCOMMON),
             GoFish.id("gameplay/fishing/gilded_blackstone_crate"));
     public static final PlatformRegistryObject<Block> ASTRAL_CRATE = registerCrate(
             "astral_crate",
             () -> new AstralCrateBlock(
-                    BlockBehaviour.Properties.copy(Blocks.END_STONE).noOcclusion()),
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE).noOcclusion()),
             new Item.Properties().fireResistant().stacksTo(8).rarity(Rarity.EPIC),
             GoFish.id("gameplay/fishing/astral_crate"));
     public static final PlatformRegistryObject<Block> END_CRATE = registerCrate(
             "end_crate",
-            () -> new AstralCrateBlock(BlockBehaviour.Properties.copy(Blocks.END_STONE)),
+            () -> new AstralCrateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE)),
             new Item.Properties().fireResistant().stacksTo(8).rarity(Rarity.EPIC),
             GoFish.id("gameplay/fishing/end_crate"));
 

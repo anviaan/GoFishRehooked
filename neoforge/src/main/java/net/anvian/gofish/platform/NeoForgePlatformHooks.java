@@ -1,6 +1,5 @@
 package net.anvian.gofish.platform;
 
-import com.mojang.datafixers.types.Type;
 import net.anvian.gofish.block.AstralCrateBlock;
 import net.anvian.gofish.command.FishCommand;
 import net.anvian.gofish.entity.block.AstralCrateBlockEntity;
@@ -15,23 +14,18 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.brewing.BrewingRecipeRegistry;
-import net.neoforged.neoforge.common.brewing.IBrewingRecipe;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,10 +57,7 @@ public final class NeoForgePlatformHooks implements IPlatformHooks {
         NeoForge.EVENT_BUS.addListener(this::modifyLootTable);
         NeoForge.EVENT_BUS.addListener(this::registerFuel);
 
-        addBrewingRecipe(GoFishItems.CLOUDY_CRAB, Potions.SLOW_FALLING);
-        addBrewingRecipe(GoFishItems.CHARFISH, Potions.WEAKNESS);
-        addBrewingRecipe(GoFishItems.RAINY_BASS, Potions.WATER_BREATHING);
-        addBrewingRecipe(GoFishItems.MAGMA_COD, Potions.FIRE_RESISTANCE);
+        NeoForge.EVENT_BUS.addListener(this::registerBrewingRecipes);
     }
 
     @SuppressWarnings({"ConstantConditions", "DataFlowIssue"})
@@ -113,28 +104,15 @@ public final class NeoForgePlatformHooks implements IPlatformHooks {
         }
     }
 
-    private static void addBrewingRecipe(Supplier<Item> ingredient, Potion outputPotion) {
-        BrewingRecipeRegistry.addRecipe(new IBrewingRecipe() {
-            @Override
-            public boolean isInput(@NotNull ItemStack input) {
-                return input.is(Items.POTION) && PotionUtils.getPotion(input) == Potions.AWKWARD;
-            }
-
-            @Override
-            public boolean isIngredient(@NotNull ItemStack input) {
-                return input.is(ingredient.get());
-            }
-
-            @Override
-            public @NotNull ItemStack getOutput(@NotNull ItemStack input, @NotNull ItemStack ingredientStack) {
-                return isInput(input) && isIngredient(ingredientStack)
-                        ? PotionUtils.setPotion(new ItemStack(Items.POTION), outputPotion)
-                        : ItemStack.EMPTY;
-            }
-        });
+    private void registerBrewingRecipes(RegisterBrewingRecipesEvent event) {
+        PotionBrewing.Builder builder = event.getBuilder();
+        builder.addMix(Potions.AWKWARD, GoFishItems.CLOUDY_CRAB.get(), Potions.SLOW_FALLING);
+        builder.addMix(Potions.AWKWARD, GoFishItems.CHARFISH.get(), Potions.WEAKNESS);
+        builder.addMix(Potions.AWKWARD, GoFishItems.RAINY_BASS.get(), Potions.WATER_BREATHING);
+        builder.addMix(Potions.AWKWARD, GoFishItems.MAGMA_COD.get(), Potions.FIRE_RESISTANCE);
     }
 
-    private static Type<?> nullDataFixerType() {
+    private static com.mojang.datafixers.types.Type<?> nullDataFixerType() {
         return null;
     }
 

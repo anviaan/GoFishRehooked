@@ -4,107 +4,15 @@ plugins {
 
 tasks.register("printEnv") {
     doLast {
-        def envFile = new File(System.getenv("GITHUB_ENV"))
+        def githubEnv = System.getenv("GITHUB_ENV")
+        if (githubEnv == null) {
+            logger.lifecycle("GITHUB_ENV is not set; release variables were not exported.")
+            return
+        }
+
+        def envFile = new File(githubEnv)
         envFile.append("MOD_VERSION=${project.version}\n")
         envFile.append("RELEASE_NAME=${project.mod_name}-${project.version}\n")
         envFile.append("GAME_VERSIONS=${project.minecraft_version_range}\n")
-    }
-}
-
-subprojects {
-    apply plugin: 'java'
-
-    java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-    java.withSourcesJar()
-    java.withJavadocJar()
-
-    jar {
-        from(rootProject.file("LICENSE")) {
-            rename { "${it}_${mod_name}" }
-        }
-        manifest {
-            attributes([
-                    'Specification-Title'     : mod_name,
-                    'Specification-Vendor'    : mod_author,
-                    'Specification-Version'   : project.jar.archiveVersion,
-                    'Implementation-Title'    : project.name,
-                    'Implementation-Version'  : project.jar.archiveVersion,
-                    'Implementation-Vendor'   : mod_author,
-                    'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                    'Timestamp'               : System.currentTimeMillis(),
-                    'Built-On-Java'           : "${System.getProperty('java.vm.version')} (${System.getProperty('java.vm.vendor')})",
-                    'Built-On-Minecraft'      : minecraft_version
-            ])
-        }
-    }
-
-    sourcesJar {
-        from(rootProject.file("LICENSE")) {
-            rename { "${it}_${mod_name}" }
-        }
-    }
-
-    repositories {
-        mavenCentral()
-        maven {
-            name = 'Sponge / Mixin'
-            url = 'https://repo.spongepowered.org/repository/maven-public/'
-        }
-        maven {
-            name = 'Minecraft Forge (mergetool)'
-            url = 'https://maven.minecraftforge.net/'
-        }
-        maven {
-            name = 'BlameJared Maven (JEI / CraftTweaker / Bookshelf)'
-            url = 'https://maven.blamejared.com'
-        }
-        maven {
-            name = 'Reposilite Anvian'
-            url = 'https://maven.anvian.net/releases'
-        }
-    }
-
-    tasks.withType(JavaCompile).configureEach {
-
-        it.options.encoding = 'UTF-8'
-        it.options.getRelease().set(17)
-    }
-
-    processResources {
-        def expandProps = [
-                "version"                      : version,
-                "group"                        : project.group,
-                "minecraft_version"            : minecraft_version,
-                "forge_version"                : forge_version,
-                "forge_loader_version_range"   : forge_loader_version_range,
-                "forge_version_range"          : forge_version_range,
-                "minecraft_version_range"      : minecraft_version_range,
-                "fabric_version"               : fabric_version,
-                "fabric_loader_version"        : fabric_loader_version,
-                "mod_name"                     : mod_name,
-                "mod_author"                   : mod_author,
-                "mod_id"                       : mod_id,
-                "license"                      : license,
-                "description"                  : project.description,
-                "neoforge_version"             : neoforge_version,
-                "neoforge_loader_version_range": neoforge_loader_version_range,
-                "credits"                      : credits,
-                "anvianslib_version"           : anvianslib_version,
-                "display_url"                  : display_url,
-                "source_url"                   : source_url,
-                "issue_tracker_url"            : issue_tracker_url,
-                "modrinth_url"                 : modrinth_url,
-                "curseforge_url"               : curseforge_url,
-                "update_json_url"              : update_json_url
-        ]
-
-        filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', '*.mixins.json']) {
-            expand expandProps
-        }
-        inputs.properties(expandProps)
-    }
-
-    tasks.withType(GenerateModuleMetadata).configureEach {
-        enabled = false
     }
 }

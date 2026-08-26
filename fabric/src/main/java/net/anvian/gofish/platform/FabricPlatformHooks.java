@@ -15,8 +15,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.alchemy.PotionBrewing;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
@@ -38,7 +36,7 @@ public final class FabricPlatformHooks implements IPlatformHooks {
                         .build(null));
 
         CommandRegistrationCallback.EVENT.register(FabricPlatformHooks::registerCommands);
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+        LootTableEvents.MODIFY.register((id, tableBuilder, source) -> {
             if (BuiltInLootTables.FISHING_FISH.equals(id) && source.isBuiltin()) {
                 tableBuilder.modifyPools(GoFishLootHandler::addFishEntries);
             }
@@ -46,11 +44,6 @@ public final class FabricPlatformHooks implements IPlatformHooks {
 
         FuelRegistry.INSTANCE.add(GoFishItems.OAKFISH.get(), 300);
         FuelRegistry.INSTANCE.add(GoFishItems.CHARFISH.get(), 1600);
-
-        PotionBrewing.addMix(Potions.AWKWARD, GoFishItems.CLOUDY_CRAB.get(), Potions.SLOW_FALLING);
-        PotionBrewing.addMix(Potions.AWKWARD, GoFishItems.CHARFISH.get(), Potions.WEAKNESS);
-        PotionBrewing.addMix(Potions.AWKWARD, GoFishItems.RAINY_BASS.get(), Potions.WATER_BREATHING);
-        PotionBrewing.addMix(Potions.AWKWARD, GoFishItems.MAGMA_COD.get(), Potions.FIRE_RESISTANCE);
     }
 
     private static void registerCommands(

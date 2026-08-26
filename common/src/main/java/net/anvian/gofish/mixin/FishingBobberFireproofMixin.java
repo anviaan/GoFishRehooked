@@ -26,8 +26,8 @@ public abstract class FishingBobberFireproofMixin extends Entity implements Fire
             SynchedEntityData.defineId(FishingBobberFireproofMixin.class, EntityDataSerializers.BOOLEAN);
 
     @Inject(method = "defineSynchedData", at = @At("RETURN"))
-    private void registerFireImmuneTracker(CallbackInfo ci) {
-        entityData.define(GF_FIRE_IMMUNE, false);
+    private void registerFireImmuneTracker(SynchedEntityData.Builder builder, CallbackInfo ci) {
+        builder.define(GF_FIRE_IMMUNE, false);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package net.anvian.gofish;
 
-import net.anvian.anvianslib.platform.Services;
 import net.anvian.anvianslib.util.LibUtil;
 import net.anvian.gofish.platform.IPlatformHooks;
 import net.anvian.gofish.platform.PlatformRegistryObject;
@@ -32,8 +31,7 @@ public final class GoFish {
     private static IPlatformHooks platform;
     private static boolean initialized;
 
-    private GoFish() {
-    }
+    private GoFish() {}
 
     public static void init(IPlatformHooks hooks) {
         if (initialized) {
@@ -43,8 +41,12 @@ public final class GoFish {
         platform = hooks;
         initialized = true;
 
-        LOG.info("Initializing {} v{} on {}", GoFishConstants.MOD_ID, GoFishConstants.MOD_VERSION,
-                Services.PLATFORM.getPlatformName());
+        LOG.info(
+                "Initializing {} v{} on {}",
+                GoFishConstants.MOD_ID,
+                GoFishConstants.MOD_VERSION,
+                platform.getClass().getSimpleName());
+
         LibUtil.setupTelemetry(GoFishConstants.MOD_ID, GoFishConstants.MOD_VERSION);
 
         GoFishBlocks.init();
@@ -70,9 +72,10 @@ public final class GoFish {
                             });
 
                             BuiltInRegistries.ITEM.entrySet().stream()
-                                    .filter(entry ->
-                                            GoFishConstants.MOD_ID.equals(entry.getKey().location().getNamespace()))
-                                    .filter(entry -> !orderedItems.contains(entry.getKey().location()))
+                                    .filter(entry -> GoFishConstants.MOD_ID.equals(
+                                            entry.getKey().location().getNamespace()))
+                                    .filter(entry -> !orderedItems.contains(
+                                            entry.getKey().location()))
                                     .forEach(entry -> output.accept(entry.getValue()));
                         })
                         .build());

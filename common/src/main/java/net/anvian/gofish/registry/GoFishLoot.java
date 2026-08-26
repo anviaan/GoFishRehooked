@@ -1,6 +1,6 @@
 package net.anvian.gofish.registry;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.anvian.gofish.GoFish;
 import net.anvian.gofish.loot.WeatherCondition;
 import net.anvian.gofish.loot.biome.MatchBiomeLootCondition;
@@ -21,7 +21,7 @@ public class GoFishLoot {
             register("weather", WeatherCondition.CODEC);
 
     private static PlatformRegistryObject<LootItemConditionType> register(
-            String id, Codec<? extends LootItemCondition> codec) {
+            String id, MapCodec<? extends LootItemCondition> codec) {
         return GoFish.register(
                 BuiltInRegistries.LOOT_CONDITION_TYPE, GoFish.id(id), () -> new LootItemConditionType(codec));
     }

@@ -2,7 +2,7 @@
   "parent": "gofish:fishing/root",
   "display": {
     "icon": {
-      "item": "gofish:starry_salmon"
+      "id": "gofish:starry_salmon"
     },
     "title": {
       "translate": "advancements.fishing.full_moon_fish.title"

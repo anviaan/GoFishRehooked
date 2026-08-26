@@ -9,7 +9,7 @@
         {
           "type": "loot_table",
           "weight": 1,
-          "name": "gofish:gameplay/fishing/end/fish"
+          "value": "gofish:gameplay/fishing/end/fish"
         }
       ]
     },
@@ -68,7 +68,7 @@
         {
           "type": "loot_table",
           "weight": 1,
-          "name": "gofish:gameplay/fishing/end/treasure"
+          "value": "gofish:gameplay/fishing/end/treasure"
         }
       ]
     },

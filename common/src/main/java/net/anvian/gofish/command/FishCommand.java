@@ -19,19 +19,27 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import java.util.List;
 
 public class FishCommand {
-    private FishCommand() {
-    }
+    private FishCommand() {}
 
-    private static final LootContextParamSet FISHING_COMMAND_PARAMS = LootContextParamSet.builder().required(LootContextParams.ORIGIN).required(LootContextParams.TOOL).optional(LootContextParams.THIS_ENTITY).required(LootContextParams.KILLER_ENTITY).build();
+    private static final LootContextParamSet FISHING_COMMAND_PARAMS = LootContextParamSet.builder()
+            .required(LootContextParams.ORIGIN)
+            .required(LootContextParams.TOOL)
+            .optional(LootContextParams.THIS_ENTITY)
+            .required(LootContextParams.KILLER_ENTITY)
+            .build();
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("fish").requires(source -> source.hasPermission(2)).executes(context -> {
-            fish(context, 1);
-            return 1;
-        }).then(Commands.argument("count", IntegerArgumentType.integer(1, 1000)).executes(context -> {
-            fish(context, IntegerArgumentType.getInteger(context, "count"));
-            return 1;
-        })));
+        dispatcher.register(Commands.literal("fish")
+                .requires(source -> source.hasPermission(2))
+                .executes(context -> {
+                    fish(context, 1);
+                    return 1;
+                })
+                .then(Commands.argument("count", IntegerArgumentType.integer(1, 1000))
+                        .executes(context -> {
+                            fish(context, IntegerArgumentType.getInteger(context, "count"));
+                            return 1;
+                        })));
     }
 
     private static void fish(CommandContext<CommandSourceStack> context, int times) throws CommandSyntaxException {
@@ -39,16 +47,21 @@ public class FishCommand {
         ServerPlayer player = serverCommandSource.getPlayerOrException();
         ServerLevel world = context.getSource().getLevel();
 
-        LootParams lootContext = new LootParams.Builder(serverCommandSource.getLevel()).withParameter(LootContextParams.ORIGIN, player.position()).withParameter(LootContextParams.TOOL, player.getItemInHand(player.getUsedItemHand())).withOptionalParameter(LootContextParams.THIS_ENTITY, player).withParameter(LootContextParams.KILLER_ENTITY, player).create(FISHING_COMMAND_PARAMS);
+        LootParams lootContext = new LootParams.Builder(serverCommandSource.getLevel())
+                .withParameter(LootContextParams.ORIGIN, player.position())
+                .withParameter(LootContextParams.TOOL, player.getItemInHand(player.getUsedItemHand()))
+                .withOptionalParameter(LootContextParams.THIS_ENTITY, player)
+                .withParameter(LootContextParams.KILLER_ENTITY, player)
+                .create(FISHING_COMMAND_PARAMS);
 
         LootTable table;
         final DimensionType dimension = world.dimensionType();
         if (dimension.ultraWarm()) {
-            table = world.getServer().getLootData().getLootTable(GoFishLootTables.NETHER_FISHING);
+            table = world.getServer().reloadableRegistries().getLootTable(GoFishLootTables.NETHER_FISHING);
         } else if (!dimension.bedWorks()) {
-            table = world.getServer().getLootData().getLootTable(GoFishLootTables.END_FISHING);
+            table = world.getServer().reloadableRegistries().getLootTable(GoFishLootTables.END_FISHING);
         } else {
-            table = world.getServer().getLootData().getLootTable(GoFishLootTables.OVERWORLD_FISHING);
+            table = world.getServer().reloadableRegistries().getLootTable(GoFishLootTables.OVERWORLD_FISHING);
         }
 
         for (int z = 0; z < times; z++) {

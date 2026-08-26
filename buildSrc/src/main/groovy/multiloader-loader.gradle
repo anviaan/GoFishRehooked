@@ -1,0 +1,42 @@
+plugins {
+    id 'multiloader-common'
+}
+
+configurations {
+    commonJava {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+    commonResources {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+}
+
+dependencies {
+    compileOnly(project(path: ':common')) {
+        capabilities {
+            requireCapability("${group}:${mod_id}")
+        }
+    }
+    commonJava project(path: ':common', configuration: 'commonJava')
+    commonResources project(path: ':common', configuration: 'commonResources')
+}
+
+def notNeoTask = { Task task -> !task.name.startsWith('neo') } as Spec<Task>
+
+tasks.withType(JavaCompile).matching(notNeoTask).configureEach {
+    source(configurations.commonJava)
+}
+
+tasks.withType(Javadoc).matching(notNeoTask).configureEach {
+    source(configurations.commonJava)
+}
+
+tasks.named('sourcesJar', Jar).configure {
+    from(configurations.commonJava)
+}
+
+tasks.withType(ProcessResources).matching(notNeoTask).configureEach {
+    from(configurations.commonResources)
+}

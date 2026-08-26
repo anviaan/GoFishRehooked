@@ -2,7 +2,7 @@
   "parent": "gofish:fishing/baked_seaweed",
   "display": {
     "icon": {
-      "item": "gofish:grilled_blackstone_deluxe"
+      "id": "gofish:grilled_blackstone_deluxe"
     },
     "title": {
       "translate": "advancements.fishing.grilled_blackstone_deluxe.title"

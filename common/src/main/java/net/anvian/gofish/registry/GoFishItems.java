@@ -108,14 +108,14 @@ public class GoFishItems {
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(2)
-                            .saturationMod(0.5f)
+                            .saturationModifier(0.5f)
                             .build())));
     public static final PlatformRegistryObject<Item> MATRIX_FISH = register(
             "matrix_fish",
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(4)
-                            .saturationMod(0.5f)
+                            .saturationModifier(0.5f)
                             .build())));
     public static final PlatformRegistryObject<Item> SEAWEED =
             register("seaweed", () -> new Item(new Item.Properties()));
@@ -124,7 +124,7 @@ public class GoFishItems {
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(4)
-                            .saturationMod(0.5f)
+                            .saturationModifier(0.5f)
                             .build())));
     public static final PlatformRegistryObject<Item> SEAWEED_EEL = register(
             "seaweed_eel",
@@ -135,7 +135,7 @@ public class GoFishItems {
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(4)
-                            .saturationMod(0.25f)
+                            .saturationModifier(0.25f)
                             .effect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 5, 0), 1)
                             .build())));
     public static final PlatformRegistryObject<Item> SNOWBALL_FISH = register(
@@ -143,28 +143,28 @@ public class GoFishItems {
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(4)
-                            .saturationMod(0.25f)
+                            .saturationModifier(0.25f)
                             .build())));
     public static final PlatformRegistryObject<Item> TERRAFISH = register(
             "terrafish",
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(4)
-                            .saturationMod(0.5f)
+                            .saturationModifier(0.5f)
                             .build())));
     public static final PlatformRegistryObject<Item> CARROT_CARP = register(
             "carrot_carp",
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(4)
-                            .saturationMod(0.25f)
+                            .saturationModifier(0.25f)
                             .build())));
     public static final PlatformRegistryObject<Item> BAKED_CARROT_CARP = register(
             "baked_carrot_carp",
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(6)
-                            .saturationMod(0.5f)
+                            .saturationModifier(0.5f)
                             .build())));
     public static final PlatformRegistryObject<Item> OAKFISH = register(
             "oakfish",
@@ -186,7 +186,7 @@ public class GoFishItems {
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(4)
-                            .saturationMod(0.75f)
+                            .saturationModifier(0.75f)
                             .build())
                     .fireResistant()));
     public static final PlatformRegistryObject<Item> GRILLED_BLACKSTONE_TROUT = register(
@@ -195,7 +195,7 @@ public class GoFishItems {
                     new Item.Properties()
                             .food(new FoodProperties.Builder()
                                     .nutrition(8)
-                                    .saturationMod(0.8f)
+                                    .saturationModifier(0.8f)
                                     .build())
                             .fireResistant(),
                     2));
@@ -205,7 +205,7 @@ public class GoFishItems {
                     new Item.Properties()
                             .food(new FoodProperties.Builder()
                                     .nutrition(11)
-                                    .saturationMod(0.8f)
+                                    .saturationModifier(0.8f)
                                     .build())
                             .fireResistant(),
                     3));
@@ -216,7 +216,7 @@ public class GoFishItems {
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(4)
-                            .saturationMod(0.5f)
+                            .saturationModifier(0.5f)
                             .build())
                     .fireResistant()));
     public static final PlatformRegistryObject<Item> SMOKEY_SALMON = register(
@@ -224,7 +224,7 @@ public class GoFishItems {
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(6)
-                            .saturationMod(0.5f)
+                            .saturationModifier(0.5f)
                             .effect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 20 * 15, 0), 1)
                             .build())
                     .fireResistant()));
@@ -233,7 +233,7 @@ public class GoFishItems {
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(6)
-                            .saturationMod(0.75f)
+                            .saturationModifier(0.75f)
                             .build())
                     .fireResistant()));
     public static final PlatformRegistryObject<Item> MAGMA_COD = register(
@@ -242,7 +242,7 @@ public class GoFishItems {
                     .food(new FoodProperties.Builder()
                             .effect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 20 * 15, 0), 1)
                             .nutrition(6)
-                            .saturationMod(0.5f)
+                            .saturationModifier(0.5f)
                             .build())
                     .fireResistant()));
     public static final PlatformRegistryObject<Item> BASALT_BASS = register(
@@ -250,7 +250,7 @@ public class GoFishItems {
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(4)
-                            .saturationMod(0.25f)
+                            .saturationModifier(0.25f)
                             .build())
                     .fireResistant()));
     public static final PlatformRegistryObject<Item> OBSIDIAN_HALIBUT = register(
@@ -258,7 +258,7 @@ public class GoFishItems {
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(4)
-                            .saturationMod(0.25f)
+                            .saturationModifier(0.25f)
                             .build())
                     .fireResistant()));
 
@@ -273,7 +273,7 @@ public class GoFishItems {
                     new Item.Properties()
                             .food(new FoodProperties.Builder()
                                     .nutrition(6)
-                                    .saturationMod(0.8f)
+                                    .saturationModifier(0.8f)
                                     .build()),
                     2));
     public static final PlatformRegistryObject<Item> ENDFISH_AND_CHORUS = register(
@@ -282,7 +282,7 @@ public class GoFishItems {
                     new Item.Properties()
                             .food(new FoodProperties.Builder()
                                     .nutrition(8)
-                                    .saturationMod(1f)
+                                    .saturationModifier(1f)
                                     .build()),
                     2));
     public static final PlatformRegistryObject<Item> CHORUS_COD = register(
@@ -329,7 +329,7 @@ public class GoFishItems {
                     new Item.Properties()
                             .food(new FoodProperties.Builder()
                                     .nutrition(9)
-                                    .saturationMod(0.75f)
+                                    .saturationModifier(0.75f)
                                     .build()),
                     3));
 
@@ -339,7 +339,7 @@ public class GoFishItems {
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(3)
-                            .saturationMod(0.5f)
+                            .saturationModifier(0.5f)
                             .build())));
     public static final PlatformRegistryObject<Item> STEAMED_BASS = register(
             "steamed_bass",
@@ -347,7 +347,7 @@ public class GoFishItems {
                     new Item.Properties()
                             .food(new FoodProperties.Builder()
                                     .nutrition(6)
-                                    .saturationMod(0.25f)
+                                    .saturationModifier(0.25f)
                                     .build()),
                     2));
     public static final PlatformRegistryObject<Item> CLOUDY_CRAB = register(
@@ -355,14 +355,14 @@ public class GoFishItems {
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(3)
-                            .saturationMod(0.75f)
+                            .saturationModifier(0.75f)
                             .build())));
     public static final PlatformRegistryObject<Item> THUNDERING_BASS = register(
             "thundering_bass",
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(5)
-                            .saturationMod(0.75f)
+                            .saturationModifier(0.75f)
                             .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15 * 20), 1)
                             .build())));
     public static final PlatformRegistryObject<Item> SMOKED_CLOUDY_CRAB = register(
@@ -370,14 +370,14 @@ public class GoFishItems {
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(7)
-                            .saturationMod(0.25f)
+                            .saturationModifier(0.25f)
                             .build())));
     public static final PlatformRegistryObject<Item> BLIZZARD_BASS = register(
             "blizzard_bass",
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(3)
-                            .saturationMod(0.5f)
+                            .saturationModifier(0.5f)
                             .build())));
 
     // accessories

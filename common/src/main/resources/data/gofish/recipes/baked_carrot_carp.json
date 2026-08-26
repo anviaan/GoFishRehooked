@@ -3,7 +3,9 @@
   "ingredient": {
     "item": "gofish:carrot_carp"
   },
-  "result": "gofish:baked_carrot_carp",
+  "result": {
+    "id": "gofish:baked_carrot_carp"
+  },
   "experience": 0.7,
   "cookingtime": 200
 }

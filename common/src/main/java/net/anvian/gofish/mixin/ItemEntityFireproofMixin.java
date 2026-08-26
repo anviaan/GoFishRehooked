@@ -27,8 +27,8 @@ public abstract class ItemEntityFireproofMixin extends Entity implements Firepro
     }
 
     @Inject(method = "defineSynchedData", at = @At("RETURN"))
-    private void registerFireImmuneTracker(CallbackInfo ci) {
-        entityData.define(GF_FIRE_IMMUNE, false);
+    private void registerFireImmuneTracker(SynchedEntityData.Builder builder, CallbackInfo ci) {
+        builder.define(GF_FIRE_IMMUNE, false);
     }
 
     @Inject(method = "fireImmune", at = @At("RETURN"), cancellable = true)

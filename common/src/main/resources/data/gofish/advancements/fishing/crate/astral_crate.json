@@ -2,7 +2,7 @@
   "parent": "gofish:fishing/full_moon_fish",
   "display": {
     "icon": {
-      "item": "gofish:astral_crate"
+      "id": "gofish:astral_crate"
     },
     "title": {
       "translate": "advancements.fishing.astral_crate.title"

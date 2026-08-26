@@ -2,7 +2,7 @@
   "parent": "gofish:fishing/root",
   "display": {
     "icon": {
-      "item": "gofish:golden_fish"
+      "id": "gofish:golden_fish"
     },
     "title": {
       "translate": "advancements.fishing.golden_lure.title"

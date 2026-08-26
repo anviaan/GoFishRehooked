@@ -10,6 +10,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
@@ -19,6 +20,8 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
@@ -73,8 +76,9 @@ public class CrateItem extends BlockItem {
         List<ItemStack> output = new ArrayList<>();
 
         if (world != null && !world.isClientSide) {
-            LootTable supplier =
-                    Objects.requireNonNull(world.getServer()).getLootData().getLootTable(identifier);
+            LootTable supplier = Objects.requireNonNull(world.getServer())
+                    .reloadableRegistries()
+                    .getLootTable(ResourceKey.create(Registries.LOOT_TABLE, identifier));
             LootParams.Builder builder = new LootParams.Builder(world).withParameter(LootContextParams.ORIGIN, pos);
 
             List<ItemStack> stacks = supplier.getRandomItems(builder.create(LootContextParamSets.CHEST));
@@ -85,8 +89,9 @@ public class CrateItem extends BlockItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
-        super.appendHoverText(stack, world, tooltip, context);
+    public void appendHoverText(
+            ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltip, flag);
         tooltip.add(Component.translatable("gofish.crate_tooltip")
                 .withStyle(ChatFormatting.GRAY)
                 .withStyle(ChatFormatting.ITALIC));

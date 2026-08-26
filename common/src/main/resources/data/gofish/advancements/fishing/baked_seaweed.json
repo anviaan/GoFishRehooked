@@ -2,7 +2,7 @@
   "parent": "gofish:fishing/seaweed",
   "display": {
     "icon": {
-      "item": "gofish:baked_seaweed"
+      "id": "gofish:baked_seaweed"
     },
     "title": {
       "translate": "advancements.fishing.baked_seaweed.title"

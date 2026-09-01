@@ -6,15 +6,18 @@ import net.anvian.gofish.api.SmeltingBobber;
 import net.anvian.gofish.api.SoundInstance;
 import net.anvian.gofish.registry.GoFishEnchantments;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
@@ -50,7 +53,7 @@ public class ExtendedFishingRodItem extends FishingRodItem {
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level world, Player user, @NotNull InteractionHand hand) {
+    public @NotNull InteractionResult use(Level world, Player user, @NotNull InteractionHand hand) {
         ItemStack heldStack = user.getItemInHand(hand);
         RandomSource random = world.random;
 
@@ -60,7 +63,7 @@ public class ExtendedFishingRodItem extends FishingRodItem {
             handleCast(world, user, heldStack, random);
         }
 
-        return InteractionResultHolder.sidedSuccess(heldStack, world.isClientSide());
+        return InteractionResult.SUCCESS;
     }
 
     private void handleRetrieve(
@@ -110,11 +113,10 @@ public class ExtendedFishingRodItem extends FishingRodItem {
                         + config.baseLure
                         + bonuses.lure(),
                 5);
-        int lots = EnchantmentHelper.getFishingLuckBonus(serverWorld, heldStack, user)
-                + config.baseLOTS
-                + bonuses.luck();
+        int lots =
+                EnchantmentHelper.getFishingLuckBonus(serverWorld, heldStack, user) + config.baseLOTS + bonuses.luck();
 
-        FishingHook bobber = new FishingHook(user, world, lots, lure);
+        FishingHook bobber = new FishingHook(user, world, lots, lure, heldStack);
         world.addFreshEntity(bobber);
         ((FireproofEntity) bobber).gfSetFireproof(config.lavaProof);
         ((SmeltingBobber) bobber).gfSetSmelts(smelts);
@@ -122,10 +124,9 @@ public class ExtendedFishingRodItem extends FishingRodItem {
     }
 
     private boolean shouldSmelt(ServerLevel world, ItemStack heldStack, boolean smeltBuff) {
-        boolean hasDeepfryEnchantment =
-                EnchantmentHelper.getItemEnchantmentLevel(
-                                GoFishEnchantments.getDeepfryHolder(world.registryAccess()), heldStack)
-                        != 0;
+        boolean hasDeepfryEnchantment = EnchantmentHelper.getItemEnchantmentLevel(
+                        GoFishEnchantments.getDeepfryHolder(world.registryAccess()), heldStack)
+                != 0;
         boolean rodAutosmelts = heldStack.getItem() instanceof ExtendedFishingRodItem extendedfishingroditem
                 && extendedfishingroditem.autosmelts();
         return hasDeepfryEnchantment || rodAutosmelts || smeltBuff;
@@ -161,18 +162,13 @@ public class ExtendedFishingRodItem extends FishingRodItem {
         return config.autosmelt;
     }
 
-    @Override
-    public int getEnchantmentValue() {
-        return 1;
-    }
-
     public boolean canFishInLava() {
         return config.lavaProof;
     }
 
     public static class Builder {
 
-        private final Item.Properties settings = new Item.Properties().durability(100);
+        private final Item.Properties settings;
         private SoundInstance retrieve =
                 new SoundInstance(SoundEvents.FISHING_BOBBER_RETRIEVE, 1.0F, SoundInstance.DEFAULT_PITCH);
         private SoundInstance cast =
@@ -184,8 +180,11 @@ public class ExtendedFishingRodItem extends FishingRodItem {
         private ChatFormatting formatting = ChatFormatting.WHITE;
         private int tooltipLines = 0;
 
-        public Builder() {
-            // NO-OP
+        public Builder(ResourceLocation id) {
+            this.settings = new Item.Properties()
+                    .setId(ResourceKey.create(Registries.ITEM, id))
+                    .durability(100)
+                    .enchantable(1);
         }
 
         public Builder durability(int durability) {

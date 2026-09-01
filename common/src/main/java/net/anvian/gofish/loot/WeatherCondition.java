@@ -6,10 +6,10 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.anvian.gofish.registry.GoFishLoot;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
@@ -35,14 +35,14 @@ public record WeatherCondition(Optional<Boolean> raining, Optional<Boolean> thun
     }
 
     @Override
-    public @NotNull Set<LootContextParam<?>> getReferencedContextParams() {
+    public @NotNull Set<ContextKey<?>> getReferencedContextParams() {
         return ImmutableSet.of(LootContextParams.THIS_ENTITY, LootContextParams.ORIGIN);
     }
 
     @Override
     public boolean test(LootContext lootContext) {
-        @Nullable Entity entity = lootContext.getParamOrNull(LootContextParams.THIS_ENTITY);
-        @Nullable Vec3 pos = lootContext.getParamOrNull(LootContextParams.ORIGIN);
+        @Nullable Entity entity = lootContext.getOptionalParameter(LootContextParams.THIS_ENTITY);
+        @Nullable Vec3 pos = lootContext.getOptionalParameter(LootContextParams.ORIGIN);
 
         if (entity != null && pos != null) {
             Level world = entity.level();
@@ -59,8 +59,9 @@ public record WeatherCondition(Optional<Boolean> raining, Optional<Boolean> thun
                 // >= .15 = no snow
                 if (world.getBiome(entity.blockPosition())
                         .value()
-                        .warmEnoughToRain(new BlockPos(
-                                (int) Math.floor(pos.x), (int) Math.floor(pos.y), (int) Math.floor(pos.z)))) {
+                        .warmEnoughToRain(
+                                new BlockPos((int) Math.floor(pos.x), (int) Math.floor(pos.y), (int) Math.floor(pos.z)),
+                                world.getSeaLevel())) {
                     return false;
                 }
 

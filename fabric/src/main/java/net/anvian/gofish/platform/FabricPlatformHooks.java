@@ -9,15 +9,15 @@ import net.anvian.gofish.registry.GoFishItems;
 import net.anvian.gofish.registry.GoFishLootHandler;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.FakePlayer;
-import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.loot.v2.FabricLootTableBuilder;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 
 import java.util.function.Supplier;
@@ -32,9 +32,9 @@ public final class FabricPlatformHooks implements IPlatformHooks {
     private static void registerPlatformHooksInternal() {
         GoFishEntities.ASTRAL_CRATE = GoFishEntities.register(
                 "astral_crate",
-                () -> BlockEntityType.Builder.of(
+                () -> FabricBlockEntityTypeBuilder.create(
                                 AstralCrateBlockEntity::new, net.anvian.gofish.registry.GoFishBlocks.ASTRAL_CRATE.get())
-                        .build(null));
+                        .build());
 
         CommandRegistrationCallback.EVENT.register(FabricPlatformHooks::registerCommands);
         LootTableEvents.MODIFY.register((id, tableBuilder, source) -> {
@@ -43,8 +43,10 @@ public final class FabricPlatformHooks implements IPlatformHooks {
             }
         });
 
-        FuelRegistry.INSTANCE.add(GoFishItems.OAKFISH.get(), 300);
-        FuelRegistry.INSTANCE.add(GoFishItems.CHARFISH.get(), 1600);
+        FuelRegistryEvents.BUILD.register((builder, context) -> {
+            builder.add(GoFishItems.OAKFISH.get(), 300);
+            builder.add(GoFishItems.CHARFISH.get(), 1600);
+        });
     }
 
     private static void registerCommands(

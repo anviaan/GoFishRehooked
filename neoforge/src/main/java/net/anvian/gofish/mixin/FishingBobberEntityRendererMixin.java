@@ -1,9 +1,8 @@
 package net.anvian.gofish.mixin;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.anvian.gofish.item.ExtendedFishingRodItem;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.FishingHookRenderer;
+import net.minecraft.client.renderer.entity.state.FishingHookRenderState;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
@@ -19,23 +18,18 @@ public class FishingBobberEntityRendererMixin {
 
     private Player gofishOwner;
 
-    @Inject(method = "render", at = @At("HEAD"))
+    @Inject(method = "extractRenderState", at = @At("HEAD"))
     private void storeContext(
-            FishingHook hook,
-            float entityYaw,
-            float partialTick,
-            PoseStack poseStack,
-            MultiBufferSource buffer,
-            int packedLight,
-            CallbackInfo callbackInfo) {
+            FishingHook hook, FishingHookRenderState renderState, float partialTick, CallbackInfo callbackInfo) {
         gofishOwner = hook.getPlayerOwner();
     }
 
-    @ModifyVariable(
-            method = "render*",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;getAttackAnim(F)F"),
-            index = 6)
+    @ModifyVariable(method = "render", at = @At("HEAD"), argsOnly = true, index = 4)
     private int modifyFishingRodAnimation(int light) {
+        if (gofishOwner == null) {
+            return light;
+        }
+
         ItemStack itemStack = gofishOwner.getMainHandItem();
         return itemStack.getItem() != Items.FISHING_ROD && itemStack.getItem() instanceof ExtendedFishingRodItem
                 ? -light

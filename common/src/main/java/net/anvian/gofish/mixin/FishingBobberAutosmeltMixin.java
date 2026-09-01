@@ -47,11 +47,13 @@ public abstract class FishingBobberAutosmeltMixin extends Entity implements Smel
             ordinal = 0)
     private ItemEntity processOutput(ItemEntity itemEntity) {
         if (gfSmelts) {
-            Optional<RecipeHolder<SmeltingRecipe>> cooked = level().getRecipeManager()
+            Optional<RecipeHolder<SmeltingRecipe>> cooked = ((net.minecraft.server.level.ServerLevel) level())
+                    .recipeAccess()
                     .getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(itemEntity.getItem()), level());
 
-            cooked.ifPresent(smeltingRecipe ->
-                    itemEntity.setItem(smeltingRecipe.value().getResultItem(level().registryAccess())));
+            cooked.ifPresent(smeltingRecipe -> itemEntity.setItem(smeltingRecipe
+                    .value()
+                    .assemble(new SingleRecipeInput(itemEntity.getItem()), level().registryAccess())));
         }
 
         return itemEntity;

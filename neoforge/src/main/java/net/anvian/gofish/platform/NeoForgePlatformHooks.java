@@ -60,12 +60,11 @@ public final class NeoForgePlatformHooks implements IPlatformHooks {
         NeoForge.EVENT_BUS.addListener(this::registerBrewingRecipes);
     }
 
-    @SuppressWarnings({"ConstantConditions", "DataFlowIssue"})
+    @SuppressWarnings({"ConstantConditions"})
     private static void registerAstralCrateEntity() {
         GoFishEntities.ASTRAL_CRATE = GoFishEntities.register(
                 "astral_crate",
-                () -> BlockEntityType.Builder.of(AstralCrateBlockEntity::new, GoFishBlocks.ASTRAL_CRATE.get())
-                        .build(nullDataFixerType()));
+                () -> new BlockEntityType<>(AstralCrateBlockEntity::new, GoFishBlocks.ASTRAL_CRATE.get()));
     }
 
     private void registerObjects(RegisterEvent event) {
@@ -110,10 +109,6 @@ public final class NeoForgePlatformHooks implements IPlatformHooks {
         builder.addMix(Potions.AWKWARD, GoFishItems.CHARFISH.get(), Potions.WEAKNESS);
         builder.addMix(Potions.AWKWARD, GoFishItems.RAINY_BASS.get(), Potions.WATER_BREATHING);
         builder.addMix(Potions.AWKWARD, GoFishItems.MAGMA_COD.get(), Potions.FIRE_RESISTANCE);
-    }
-
-    private static com.mojang.datafixers.types.Type<?> nullDataFixerType() {
-        return null;
     }
 
     @Override

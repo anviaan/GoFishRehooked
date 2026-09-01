@@ -1,13 +1,14 @@
 package net.anvian.gofish.item;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -20,8 +21,6 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,18 +43,17 @@ public class CrateItem extends BlockItem {
 
         if (player != null && player.isShiftKeyDown()) {
             openCrate(context.getLevel(), player, context.getHand());
-            return InteractionResult.sidedSuccess(context.getLevel().isClientSide);
+            return InteractionResult.SUCCESS;
         }
 
         return super.useOn(context);
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(
-            @NotNull Level world, Player user, @NotNull InteractionHand hand) {
+    public @NotNull InteractionResult use(@NotNull Level world, Player user, @NotNull InteractionHand hand) {
         if (user.isShiftKeyDown()) {
             openCrate(world, user, hand);
-            return InteractionResultHolder.success(user.getItemInHand(hand));
+            return InteractionResult.SUCCESS;
         }
 
         return super.use(world, user, hand);

@@ -67,7 +67,7 @@ public final class GoFish {
 
                             GoFishConstants.CREATIVE_ITEM_ORDER.forEach(name -> {
                                 ResourceLocation itemId = id(name);
-                                output.accept(BuiltInRegistries.ITEM.get(itemId));
+                                output.accept(BuiltInRegistries.ITEM.getValue(itemId));
                                 orderedItems.add(itemId);
                             });
 

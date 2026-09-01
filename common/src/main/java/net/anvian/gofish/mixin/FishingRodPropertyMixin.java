@@ -3,14 +3,13 @@ package net.anvian.gofish.mixin;
 import net.anvian.gofish.api.ExperienceBobber;
 import net.anvian.gofish.api.FireproofEntity;
 import net.anvian.gofish.api.SmeltingBobber;
-import net.anvian.gofish.item.FishingBonusCalculator;
 import net.anvian.gofish.item.ExtendedFishingRodItem;
+import net.anvian.gofish.item.FishingBonusCalculator;
 import net.anvian.gofish.registry.GoFishEnchantments;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.FishingRodItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -36,7 +35,7 @@ public class FishingRodPropertyMixin {
             Level world,
             Player user,
             InteractionHand hand,
-            CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
+            CallbackInfoReturnable<net.minecraft.world.InteractionResult> cir) {
         this.heldStack = user.getItemInHand(hand);
         this.player = user;
     }
@@ -47,24 +46,23 @@ public class FishingRodPropertyMixin {
                     @At(
                             value = "INVOKE",
                             target =
-                                    "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"))
-    private Entity modifyBobber(Entity entity) {
-        Level world = entity.level();
-        if (entity instanceof FishingHook bobber) {
+                                    "Lnet/minecraft/world/entity/projectile/Projectile;spawnProjectile(Lnet/minecraft/world/entity/projectile/Projectile;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/projectile/Projectile;"))
+    private Projectile modifyBobber(Projectile projectile) {
+        Level world = projectile.level();
+        if (projectile instanceof FishingHook bobber) {
             modifyBobber(world, bobber);
         }
 
-        return entity;
+        return projectile;
     }
 
     @Unique
     private void modifyBobber(Level world, FishingHook bobber) {
         FishingBonusCalculator.Bonuses bonuses = FishingBonusCalculator.collect(world, player, false);
 
-        boolean hasDeepfryEnchantment =
-                EnchantmentHelper.getItemEnchantmentLevel(
-                                GoFishEnchantments.getDeepfryHolder(world.registryAccess()), heldStack)
-                        != 0;
+        boolean hasDeepfryEnchantment = EnchantmentHelper.getItemEnchantmentLevel(
+                        GoFishEnchantments.getDeepfryHolder(world.registryAccess()), heldStack)
+                != 0;
         boolean rodAutosmelts = heldStack.getItem() instanceof ExtendedFishingRodItem extendedfishingroditem
                 && extendedfishingroditem.autosmelts();
         boolean smelts = hasDeepfryEnchantment || rodAutosmelts || bonuses.smeltBuff();

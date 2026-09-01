@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "gofish:rainy_bass"
-  },
+  "ingredient": "gofish:rainy_bass",
   "result": {
     "id": "gofish:steamed_bass"
   },

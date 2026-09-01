@@ -1,0 +1,14 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:fishing_rod/cast",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "gofish:item/ender_rod"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "gofish:item/ender_rod_cast"
+    }
+  }
+}

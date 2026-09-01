@@ -1,0 +1,18 @@
+{
+  "model": {
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "gofish:item/astral_crate"
+      },
+      {
+        "type": "minecraft:special",
+        "base": "gofish:item/astral_crate",
+        "model": {
+          "type": "gofish:astral_crate"
+        }
+      }
+    ]
+  }
+}

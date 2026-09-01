@@ -116,7 +116,7 @@ public class ExtendedFishingRodItem extends FishingRodItem {
         int lots =
                 EnchantmentHelper.getFishingLuckBonus(serverWorld, heldStack, user) + config.baseLOTS + bonuses.luck();
 
-        FishingHook bobber = new FishingHook(user, world, lots, lure, heldStack);
+        FishingHook bobber = new FishingHook(user, world, lots, lure);
         world.addFreshEntity(bobber);
         ((FireproofEntity) bobber).gfSetFireproof(config.lavaProof);
         ((SmeltingBobber) bobber).gfSetSmelts(smelts);

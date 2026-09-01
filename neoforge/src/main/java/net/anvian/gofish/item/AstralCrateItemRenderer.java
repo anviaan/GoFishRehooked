@@ -1,44 +1,97 @@
 package net.anvian.gofish.item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.anvian.gofish.entity.block.AstralCrateBlockEntity;
-import net.anvian.gofish.registry.GoFishBlocks;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.core.BlockPos;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
+import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
+import org.joml.Matrix4f;
 
-public final class AstralCrateItemRenderer extends BlockEntityWithoutLevelRenderer {
-
-    private final AstralCrateBlockEntity crate = new AstralCrateBlockEntity(
-            BlockPos.ZERO, GoFishBlocks.ASTRAL_CRATE.get().defaultBlockState());
-
-    public AstralCrateItemRenderer() {
-        super(
-                Minecraft.getInstance().getBlockEntityRenderDispatcher(),
-                Minecraft.getInstance().getEntityModels());
-    }
+public final class AstralCrateItemRenderer implements NoDataSpecialModelRenderer {
+    private static final float COLOR = 0.2F;
 
     @Override
-    public void renderByItem(
-            @NotNull ItemStack stack,
-            @NotNull ItemDisplayContext displayContext,
-            @NotNull PoseStack poseStack,
-            @NotNull MultiBufferSource buffer,
+    public void render(
+            ItemDisplayContext displayContext,
+            PoseStack poseStack,
+            MultiBufferSource buffer,
             int packedLight,
-            int packedOverlay) {
-        Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getBlockEntityRenderDispatcher().renderItem(crate, poseStack, buffer, packedLight, packedOverlay);
-        minecraft
-                .getBlockRenderer()
-                .renderSingleBlock(
-                        GoFishBlocks.ASTRAL_CRATE.get().defaultBlockState(),
-                        poseStack,
-                        buffer,
-                        packedLight,
-                        packedOverlay);
+            int packedOverlay,
+            boolean hasFoil) {
+        renderSides(poseStack.last().pose(), buffer.getBuffer(RenderType.endPortal()));
     }
+
+    private void renderSides(Matrix4f pose, VertexConsumer vertices) {
+        renderSide(
+                pose,
+                vertices,
+                new Vertex(0.0F, 0.01F, 0.99F),
+                new Vertex(0.99F, 0.01F, 1.0F),
+                new Vertex(0.99F, 1.0F, 1.0F),
+                new Vertex(0.0F, 1.0F, 1.0F));
+        renderSide(
+                pose,
+                vertices,
+                new Vertex(0.01F, 0.99F, 0.01F),
+                new Vertex(0.99F, 0.99F, 0.0F),
+                new Vertex(0.99F, 0.0F, 0.0F),
+                new Vertex(0.01F, 0.0F, 0.0F));
+        renderSide(
+                pose,
+                vertices,
+                new Vertex(0.99F, 0.99F, 0.0F),
+                new Vertex(0.99F, 0.99F, 1.0F),
+                new Vertex(0.99F, 0.0F, 1.0F),
+                new Vertex(0.99F, 0.0F, 0.0F));
+        renderSide(
+                pose,
+                vertices,
+                new Vertex(0.01F, 0.01F, 0.0F),
+                new Vertex(0.01F, 0.01F, 1.0F),
+                new Vertex(0.01F, 1.0F, 1.0F),
+                new Vertex(0.01F, 1.0F, 0.0F));
+        renderSide(
+                pose,
+                vertices,
+                new Vertex(0.01F, 0.01F, 0.0F),
+                new Vertex(0.99F, 0.01F, 0.0F),
+                new Vertex(0.99F, 0.0F, 1.0F),
+                new Vertex(0.01F, 0.0F, 1.0F));
+        renderSide(
+                pose,
+                vertices,
+                new Vertex(0.01F, 0.99F, 1.0F),
+                new Vertex(0.99F, 0.99F, 1.0F),
+                new Vertex(0.99F, 0.99F, 0.0F),
+                new Vertex(0.01F, 0.99F, 0.0F));
+    }
+
+    private void renderSide(Matrix4f pose, VertexConsumer vertices, Vertex v1, Vertex v2, Vertex v3, Vertex v4) {
+        vertices.addVertex(pose, v1.x(), v1.y(), v1.z()).setColor(COLOR, COLOR, COLOR, 1.0F);
+        vertices.addVertex(pose, v2.x(), v2.y(), v2.z()).setColor(COLOR, COLOR, COLOR, 1.0F);
+        vertices.addVertex(pose, v3.x(), v3.y(), v3.z()).setColor(COLOR, COLOR, COLOR, 1.0F);
+        vertices.addVertex(pose, v4.x(), v4.y(), v4.z()).setColor(COLOR, COLOR, COLOR, 1.0F);
+    }
+
+    public static final class Unbaked implements SpecialModelRenderer.Unbaked {
+        public static final MapCodec<Unbaked> MAP_CODEC = MapCodec.unit(new Unbaked());
+
+        private Unbaked() {}
+
+        @Override
+        public SpecialModelRenderer<?> bake(EntityModelSet modelSet) {
+            return new AstralCrateItemRenderer();
+        }
+
+        @Override
+        public MapCodec<Unbaked> type() {
+            return MAP_CODEC;
+        }
+    }
+
+    private record Vertex(float x, float y, float z) {}
 }

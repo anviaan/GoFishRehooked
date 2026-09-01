@@ -2,13 +2,5 @@
   "parent": "item/handheld_rod",
   "textures": {
     "layer0": "gofish:item/eye_of_fishing"
-  },
-  "overrides": [
-    {
-      "predicate": {
-        "cast": 1
-      },
-      "model": "gofish:item/ender_rod_cast"
-    }
-  ]
+  }
 }

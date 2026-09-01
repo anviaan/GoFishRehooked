@@ -10,9 +10,9 @@ public class GoFishTags {
     private GoFishTags() {}
 
     public static final TagKey<Biome> ICY =
-            TagKey.create(Registries.BIOME, new ResourceLocation(GoFishConstants.MOD_ID, "icy_biomes"));
+            TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(GoFishConstants.MOD_ID, "icy_biomes"));
     public static final TagKey<Biome> PLAINS =
-            TagKey.create(Registries.BIOME, new ResourceLocation(GoFishConstants.MOD_ID, "plains_biomes"));
+            TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(GoFishConstants.MOD_ID, "plains_biomes"));
     public static final TagKey<Biome> SWAMP =
-            TagKey.create(Registries.BIOME, new ResourceLocation(GoFishConstants.MOD_ID, "swamp_biomes"));
+            TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(GoFishConstants.MOD_ID, "swamp_biomes"));
 }

@@ -23,20 +23,24 @@ dependencies {
     commonResources project(path: ':common', configuration: 'commonResources')
 }
 
-def notNeoTask = { Task task -> !task.name.startsWith('neo') } as Spec<Task>
-
-tasks.withType(JavaCompile).matching(notNeoTask).configureEach {
+tasks.named('compileJava', JavaCompile) {
+    dependsOn(configurations.commonJava)
     source(configurations.commonJava)
 }
 
-tasks.withType(Javadoc).matching(notNeoTask).configureEach {
+processResources {
+    dependsOn(configurations.commonResources)
+    from(configurations.commonResources)
+}
+
+tasks.named('javadoc', Javadoc).configure {
+    dependsOn(configurations.commonJava)
     source(configurations.commonJava)
 }
 
 tasks.named('sourcesJar', Jar).configure {
+    dependsOn(configurations.commonJava)
     from(configurations.commonJava)
-}
-
-tasks.withType(ProcessResources).matching(notNeoTask).configureEach {
+    dependsOn(configurations.commonResources)
     from(configurations.commonResources)
 }

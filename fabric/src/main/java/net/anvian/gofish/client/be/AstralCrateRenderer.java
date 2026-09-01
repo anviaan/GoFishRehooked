@@ -38,10 +38,10 @@ public final class AstralCrateRenderer extends TheEndPortalRenderer<AstralCrateB
     }
 
     private void renderSide(Matrix4f pose, VertexConsumer vertices, Quad quad) {
-        vertices.vertex(pose, quad.x1(), quad.y1(), quad.z1()).color(COLOR, COLOR, COLOR, 1.0F).endVertex();
-        vertices.vertex(pose, quad.x2(), quad.y1(), quad.z2()).color(COLOR, COLOR, COLOR, 1.0F).endVertex();
-        vertices.vertex(pose, quad.x2(), quad.y2(), quad.z3()).color(COLOR, COLOR, COLOR, 1.0F).endVertex();
-        vertices.vertex(pose, quad.x1(), quad.y2(), quad.z4()).color(COLOR, COLOR, COLOR, 1.0F).endVertex();
+        vertices.addVertex(pose, quad.x1(), quad.y1(), quad.z1()).setColor(COLOR, COLOR, COLOR, 1.0F);
+        vertices.addVertex(pose, quad.x2(), quad.y1(), quad.z2()).setColor(COLOR, COLOR, COLOR, 1.0F);
+        vertices.addVertex(pose, quad.x2(), quad.y2(), quad.z3()).setColor(COLOR, COLOR, COLOR, 1.0F);
+        vertices.addVertex(pose, quad.x1(), quad.y2(), quad.z4()).setColor(COLOR, COLOR, COLOR, 1.0F);
     }
 
     private record Quad(float x1, float x2, float y1, float y2, float z1, float z2, float z3, float z4) {}

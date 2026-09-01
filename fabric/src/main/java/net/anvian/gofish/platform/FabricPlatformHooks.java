@@ -10,6 +10,7 @@ import net.anvian.gofish.registry.GoFishLootHandler;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.FakePlayer;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.loot.v2.FabricLootTableBuilder;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -38,7 +39,7 @@ public final class FabricPlatformHooks implements IPlatformHooks {
         CommandRegistrationCallback.EVENT.register(FabricPlatformHooks::registerCommands);
         LootTableEvents.MODIFY.register((id, tableBuilder, source) -> {
             if (BuiltInLootTables.FISHING_FISH.equals(id) && source.isBuiltin()) {
-                tableBuilder.modifyPools(GoFishLootHandler::addFishEntries);
+                ((FabricLootTableBuilder) tableBuilder).modifyPools(GoFishLootHandler::addFishEntries);
             }
         });
 

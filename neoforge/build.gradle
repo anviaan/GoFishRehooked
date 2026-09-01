@@ -1,57 +1,38 @@
 plugins {
     id 'multiloader-loader'
-    id 'net.neoforged.gradle.userdev' version '7.0.107'
+    id 'net.neoforged.moddev'
 }
 
-tasks.named("clean") {
-    setDelete(project.fileTree(project.layout.buildDirectory) {
-        exclude("neoForge/**")
-        exclude("neoForm/**")
-    })
-}
-
-if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
-    minecraft.accessTransformers.file file('src/main/resources/META-INF/accesstransformer.cfg')
-}
-
-def anviansLibDevModPath = file("${buildDir}/dev-mods/anvianslib-neoforge.jar")
-def prepareAnviansLibDevMod = tasks.register('prepareAnviansLibDevMod', Jar) {
-    archiveFileName = anviansLibDevModPath.name
-    destinationDirectory = anviansLibDevModPath.parentFile
-    from({
-        def library = configurations.compileClasspath.files.find { it.name.startsWith('anvianslib-neoforge-') }
-        if (library == null) {
-            throw new GradleException("Could not resolve the NeoForge Anvian's Lib development mod")
+neoForge {
+    version = neoforge_version
+    def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers.add(at.absolutePath)
+    }
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
+    runs {
+        configureEach {
+            systemProperty('neoforge.enabledGameTestNamespaces', mod_id)
+            ideName = "NeoForge ${it.name.capitalize()} (${project.path})"
         }
-        zipTree(library)
-    })
-    filesMatching('META-INF/mods.toml') {
-        path = 'META-INF/neoforge.mods.toml'
-        filter { line ->
-            line
-                    .replace('loaderVersion = "[1,)"', 'loaderVersion = "[2,)"')
-                    .replace('mandatory = true', 'type = "required"')
-                    .replace('mandatory = false', 'type = "optional"')
+        client {
+            client()
+        }
+        data {
+            data()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+        server {
+            server()
         }
     }
-}
-
-runs {
-    configureEach {
-        modSource project.sourceSets.main
-    }
-    client {
-        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-    }
-    server {
-        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-        programArgument '--nogui'
-    }
-    gameTestServer {
-        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-    }
-    data {
-        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
     }
 }
 
@@ -60,17 +41,5 @@ sourceSets.main.resources {
 }
 
 dependencies {
-    implementation "net.neoforged:neoforge:${neoforge_version}"
-    implementation "net.anvian.anvianslib:anvianslib-neoforge-${anvianslib_neoforge_minecraft_version}:${anvianslib_version}"
-}
-
-afterEvaluate {
-    ['client', 'server', 'gameTestServer', 'data'].each { runName ->
-        def run = runs.getByName(runName)
-        def environment = project.objects.mapProperty(String, String)
-        environment.putAll(run.environmentVariables.get())
-        environment.put('MOD_CLASSES', run.environmentVariables.get().get('MOD_CLASSES') + File.pathSeparator + "anvianslib%%${anviansLibDevModPath.absolutePath}")
-        run.overrideEnvironmentVariables(environment)
-        run.dependsOn(prepareAnviansLibDevMod)
-    }
+    implementation "net.anvian.anvianslib:anvianslib-neoforge-${anvianslib_minecraft_version}:${anvianslib_version}"
 }

@@ -75,17 +75,9 @@ public final class AstralCrateRenderer extends TheEndPortalRenderer<AstralCrateB
 
     private void renderSide(Matrix4f pose, VertexConsumer vertices, Vertex v1, Vertex v2, Vertex v3, Vertex v4) {
         float color = 0.2F;
-        vertices.vertex(pose, v1.x(), v1.y(), v1.z())
-                .color(color, color, color, 1.0F)
-                .endVertex();
-        vertices.vertex(pose, v2.x(), v2.y(), v2.z())
-                .color(color, color, color, 1.0F)
-                .endVertex();
-        vertices.vertex(pose, v3.x(), v3.y(), v3.z())
-                .color(color, color, color, 1.0F)
-                .endVertex();
-        vertices.vertex(pose, v4.x(), v4.y(), v4.z())
-                .color(color, color, color, 1.0F)
-                .endVertex();
+        vertices.addVertex(pose, v1.x(), v1.y(), v1.z()).setColor(color, color, color, 1.0F);
+        vertices.addVertex(pose, v2.x(), v2.y(), v2.z()).setColor(color, color, color, 1.0F);
+        vertices.addVertex(pose, v3.x(), v3.y(), v3.z()).setColor(color, color, color, 1.0F);
+        vertices.addVertex(pose, v4.x(), v4.y(), v4.z()).setColor(color, color, color, 1.0F);
     }
 }

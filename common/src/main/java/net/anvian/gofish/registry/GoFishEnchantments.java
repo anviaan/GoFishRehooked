@@ -1,20 +1,19 @@
 package net.anvian.gofish.registry;
 
-import net.anvian.gofish.GoFish;
-import net.anvian.gofish.enchantment.DeepfryEnchantment;
-import net.anvian.gofish.platform.PlatformRegistryObject;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Holder;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.enchantment.Enchantment;
 
-import java.util.function.Supplier;
-
-public class GoFishEnchantments {
+public final class GoFishEnchantments {
     private GoFishEnchantments() {}
 
-    public static final PlatformRegistryObject<Enchantment> DEEPFRY = register("deepfry", DeepfryEnchantment::new);
+    public static final ResourceKey<Enchantment> DEEPFRY =
+            ResourceKey.create(Registries.ENCHANTMENT, net.anvian.gofish.GoFish.id("deepfry"));
 
-    public static PlatformRegistryObject<Enchantment> register(String name, Supplier<Enchantment> enchantment) {
-        return GoFish.register(BuiltInRegistries.ENCHANTMENT, GoFish.id(name), enchantment);
+    public static Holder<Enchantment> getDeepfryHolder(RegistryAccess registryAccess) {
+        return registryAccess.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(DEEPFRY);
     }
 
     public static void init() {

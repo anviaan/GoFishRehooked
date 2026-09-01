@@ -15,7 +15,7 @@ public final class GoFishConstants {
     public static final String MOD_NAME = "Go Fish Rehooked";
     public static final String MOD_VERSION = "2.0.0";
     public static final ResourceKey<CreativeModeTab> ITEM_GROUP =
-            ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(MOD_ID, "group"));
+            ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(MOD_ID, "group"));
     static final List<String> CREATIVE_ITEM_ORDER = List.of(
             // Fishing rods
             "blaze_rod",

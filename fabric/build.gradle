@@ -1,18 +1,14 @@
-import net.anvian.gradle.StripFabricLoomVersion
-
 plugins {
     id 'multiloader-loader'
-    id 'fabric-loom' version '1.6.12'
+    id 'fabric-loom'
 }
 
 dependencies {
-    registerTransform(StripFabricLoomVersion) {
-        from.attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, ArtifactTypeDefinition.JAR_TYPE)
-        to.attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, 'sanitized-fabric-jar')
-    }
-
     minecraft "com.mojang:minecraft:${minecraft_version}"
-    mappings loom.officialMojangMappings()
+    mappings loom.layered {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${parchment_minecraft}:${parchment_version}@zip")
+    }
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     implementation 'com.google.code.findbugs:jsr305:3.0.1'
@@ -31,13 +27,13 @@ loom {
             client()
             setConfigName('Fabric Client')
             ideConfigGenerated(true)
-            runDir('run')
+            runDir('runs/client')
         }
         server {
             server()
             setConfigName('Fabric Server')
             ideConfigGenerated(true)
-            runDir('run')
+            runDir('runs/server')
         }
     }
 }

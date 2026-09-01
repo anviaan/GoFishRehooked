@@ -1,6 +1,10 @@
 plugins {
-    id "org.jetbrains.gradle.plugin.idea-ext" version "1.1.7"
+    id 'fabric-loom' version '1.7-SNAPSHOT' apply false
+    id 'net.neoforged.moddev' version '0.1.110' apply false
 }
+
+group = project.group
+version = project.version
 
 tasks.register("printEnv") {
     doLast {

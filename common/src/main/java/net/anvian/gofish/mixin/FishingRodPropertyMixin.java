@@ -62,7 +62,9 @@ public class FishingRodPropertyMixin {
         FishingBonusCalculator.Bonuses bonuses = FishingBonusCalculator.collect(world, player, false);
 
         boolean hasDeepfryEnchantment =
-                EnchantmentHelper.getItemEnchantmentLevel(GoFishEnchantments.DEEPFRY.get(), heldStack) != 0;
+                EnchantmentHelper.getItemEnchantmentLevel(
+                                GoFishEnchantments.getDeepfryHolder(world.registryAccess()), heldStack)
+                        != 0;
         boolean rodAutosmelts = heldStack.getItem() instanceof ExtendedFishingRodItem extendedfishingroditem
                 && extendedfishingroditem.autosmelts();
         boolean smelts = hasDeepfryEnchantment || rodAutosmelts || bonuses.smeltBuff();

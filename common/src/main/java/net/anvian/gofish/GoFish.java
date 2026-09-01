@@ -84,7 +84,7 @@ public final class GoFish {
     }
 
     public static ResourceLocation id(String name) {
-        return new ResourceLocation(GoFishConstants.MOD_ID, name);
+        return ResourceLocation.fromNamespaceAndPath(GoFishConstants.MOD_ID, name);
     }
 
     public static Item createCrateItem(Block block, Item.Properties properties, ResourceLocation lootTable) {

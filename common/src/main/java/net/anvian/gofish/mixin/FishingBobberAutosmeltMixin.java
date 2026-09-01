@@ -1,13 +1,13 @@
 package net.anvian.gofish.mixin;
 
 import net.anvian.gofish.api.SmeltingBobber;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -48,7 +48,7 @@ public abstract class FishingBobberAutosmeltMixin extends Entity implements Smel
     private ItemEntity processOutput(ItemEntity itemEntity) {
         if (gfSmelts) {
             Optional<RecipeHolder<SmeltingRecipe>> cooked = level().getRecipeManager()
-                    .getRecipeFor(RecipeType.SMELTING, new SimpleContainer(itemEntity.getItem()), level());
+                    .getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(itemEntity.getItem()), level());
 
             cooked.ifPresent(smeltingRecipe ->
                     itemEntity.setItem(smeltingRecipe.value().getResultItem(level().registryAccess())));

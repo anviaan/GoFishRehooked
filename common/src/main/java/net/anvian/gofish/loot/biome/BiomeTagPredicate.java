@@ -52,14 +52,14 @@ public record BiomeTagPredicate(List<TagKey<Biome>> valid) {
         public Builder setValidByString(List<String> valid) {
             List<TagKey<Biome>> tagKeys = new ArrayList<>();
             for (String str : valid) {
-                tagKeys.add(TagKey.create(Registries.BIOME, new ResourceLocation(str)));
+                tagKeys.add(TagKey.create(Registries.BIOME, ResourceLocation.parse(str)));
             }
             return setValid(tagKeys);
         }
 
         public Builder add(String tag) {
             if (!tag.isEmpty()) {
-                this.valid.add(TagKey.create(Registries.BIOME, new ResourceLocation(tag)));
+                this.valid.add(TagKey.create(Registries.BIOME, ResourceLocation.parse(tag)));
             }
 
             return this;

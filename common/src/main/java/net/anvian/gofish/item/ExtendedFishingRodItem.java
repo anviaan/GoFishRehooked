@@ -8,6 +8,7 @@ import net.anvian.gofish.registry.GoFishEnchantments;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -96,12 +97,22 @@ public class ExtendedFishingRodItem extends FishingRodItem {
     }
 
     private void spawnBobber(Level world, Player user, ItemStack heldStack) {
+        if (!(world instanceof ServerLevel serverWorld)) {
+            return;
+        }
+
         FishingBonusCalculator.Bonuses bonuses = FishingBonusCalculator.collect(world, user, config.nightLuck);
 
-        boolean smelts = shouldSmelt(heldStack, bonuses.smeltBuff());
+        boolean smelts = shouldSmelt(serverWorld, heldStack, bonuses.smeltBuff());
 
-        int lure = Math.min(EnchantmentHelper.getFishingSpeedBonus(heldStack) + config.baseLure + bonuses.lure(), 5);
-        int lots = EnchantmentHelper.getFishingLuckBonus(heldStack) + config.baseLOTS + bonuses.luck();
+        int lure = Math.min(
+                (int) (EnchantmentHelper.getFishingTimeReduction(serverWorld, heldStack, user) * 20.0F)
+                        + config.baseLure
+                        + bonuses.lure(),
+                5);
+        int lots = EnchantmentHelper.getFishingLuckBonus(serverWorld, heldStack, user)
+                + config.baseLOTS
+                + bonuses.luck();
 
         FishingHook bobber = new FishingHook(user, world, lots, lure);
         world.addFreshEntity(bobber);
@@ -110,9 +121,11 @@ public class ExtendedFishingRodItem extends FishingRodItem {
         ((ExperienceBobber) bobber).gfSetBaseExperience(config.baseExperience + bonuses.experience());
     }
 
-    private boolean shouldSmelt(ItemStack heldStack, boolean smeltBuff) {
+    private boolean shouldSmelt(ServerLevel world, ItemStack heldStack, boolean smeltBuff) {
         boolean hasDeepfryEnchantment =
-                EnchantmentHelper.getItemEnchantmentLevel(GoFishEnchantments.DEEPFRY.get(), heldStack) != 0;
+                EnchantmentHelper.getItemEnchantmentLevel(
+                                GoFishEnchantments.getDeepfryHolder(world.registryAccess()), heldStack)
+                        != 0;
         boolean rodAutosmelts = heldStack.getItem() instanceof ExtendedFishingRodItem extendedfishingroditem
                 && extendedfishingroditem.autosmelts();
         return hasDeepfryEnchantment || rodAutosmelts || smeltBuff;

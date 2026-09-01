@@ -13,20 +13,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
 import java.util.List;
 
 public class FishCommand {
     private FishCommand() {}
-
-    private static final LootContextParamSet FISHING_COMMAND_PARAMS = LootContextParamSet.builder()
-            .required(LootContextParams.ORIGIN)
-            .required(LootContextParams.TOOL)
-            .optional(LootContextParams.THIS_ENTITY)
-            .required(LootContextParams.KILLER_ENTITY)
-            .build();
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("fish")
@@ -51,8 +44,7 @@ public class FishCommand {
                 .withParameter(LootContextParams.ORIGIN, player.position())
                 .withParameter(LootContextParams.TOOL, player.getItemInHand(player.getUsedItemHand()))
                 .withOptionalParameter(LootContextParams.THIS_ENTITY, player)
-                .withParameter(LootContextParams.KILLER_ENTITY, player)
-                .create(FISHING_COMMAND_PARAMS);
+                .create(LootContextParamSets.FISHING);
 
         LootTable table;
         final DimensionType dimension = world.dimensionType();

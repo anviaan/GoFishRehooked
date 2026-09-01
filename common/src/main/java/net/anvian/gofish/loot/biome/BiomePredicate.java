@@ -54,7 +54,7 @@ public record BiomePredicate(List<ResourceKey<Biome>> valid) {
             List<ResourceKey<Biome>> rKeys = new ArrayList<>();
             for (String str : valid) {
                 if (!valid.isEmpty()) {
-                    rKeys.add(ResourceKey.create(Registries.BIOME, new ResourceLocation(str)));
+                    rKeys.add(ResourceKey.create(Registries.BIOME, ResourceLocation.parse(str)));
                 }
             }
 
@@ -68,7 +68,7 @@ public record BiomePredicate(List<ResourceKey<Biome>> valid) {
 
         public Builder add(String biome) {
             if (!biome.isEmpty()) {
-                valid.add(ResourceKey.create(Registries.BIOME, new ResourceLocation(biome)));
+                valid.add(ResourceKey.create(Registries.BIOME, ResourceLocation.parse(biome)));
             }
 
             return this;

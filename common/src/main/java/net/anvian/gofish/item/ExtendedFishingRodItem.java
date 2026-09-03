@@ -25,11 +25,12 @@ import net.minecraft.world.item.FishingRodItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class ExtendedFishingRodItem extends FishingRodItem {
 
@@ -146,13 +147,14 @@ public class ExtendedFishingRodItem extends FishingRodItem {
     public void appendHoverText(
             @NotNull ItemStack stack,
             Item.@NotNull TooltipContext context,
-            @NotNull List<Component> tooltip,
+            @NotNull TooltipDisplay tooltipDisplay,
+            @NotNull Consumer<Component> tooltip,
             @NotNull TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltip, flag);
+        super.appendHoverText(stack, context, tooltipDisplay, tooltip, flag);
 
         if (config.lines > 0) {
             for (int i = 1; i <= config.lines; i++) {
-                tooltip.add(Component.translatable(String.format("%s.tooltip_%d", getDescriptionId(), i))
+                tooltip.accept(Component.translatable(String.format("%s.tooltip_%d", getDescriptionId(), i))
                         .withStyle(ChatFormatting.GRAY));
             }
         }

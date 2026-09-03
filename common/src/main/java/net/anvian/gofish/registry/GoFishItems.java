@@ -107,7 +107,7 @@ public class GoFishItems {
             () -> new Item(itemProperties("icicle_fish")
                     .food(
                             new FoodProperties.Builder().nutrition(2).build(),
-                            foodWithEffect(new MobEffectInstance(MobEffects.HARM, 0, 0), 1.0F))));
+                            foodWithEffect(new MobEffectInstance(MobEffects.INSTANT_DAMAGE, 0, 0), 1.0F))));
     public static final PlatformRegistryObject<Item> LILYFISH = register(
             "lilyfish",
             () -> new Item(itemProperties("lilyfish")
@@ -143,7 +143,7 @@ public class GoFishItems {
                                     .nutrition(4)
                                     .saturationModifier(0.25f)
                                     .build(),
-                            foodWithEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 5, 0), 1.0F))));
+                            foodWithEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20 * 5, 0), 1.0F))));
     public static final PlatformRegistryObject<Item> SNOWBALL_FISH = register(
             "snowball_fish",
             () -> new Item(itemProperties("snowball_fish")
@@ -372,7 +372,7 @@ public class GoFishItems {
                                     .nutrition(5)
                                     .saturationModifier(0.75f)
                                     .build(),
-                            foodWithEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15 * 20), 1.0F))));
+                            foodWithEffect(new MobEffectInstance(MobEffects.SPEED, 15 * 20), 1.0F))));
     public static final PlatformRegistryObject<Item> SMOKED_CLOUDY_CRAB = register(
             "smoked_cloudy_crab",
             () -> new Item(itemProperties("smoked_cloudy_crab")

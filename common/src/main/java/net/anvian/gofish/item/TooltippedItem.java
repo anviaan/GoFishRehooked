@@ -5,9 +5,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class TooltippedItem extends Item {
 
@@ -22,13 +23,14 @@ public class TooltippedItem extends Item {
     public void appendHoverText(
             @NotNull ItemStack stack,
             Item.@NotNull TooltipContext context,
-            @NotNull List<Component> tooltip,
+            @NotNull TooltipDisplay tooltipDisplay,
+            @NotNull Consumer<Component> tooltip,
             @NotNull TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltip, flag);
+        super.appendHoverText(stack, context, tooltipDisplay, tooltip, flag);
 
         if (lines > 0) {
             for (int i = 1; i <= lines; i++) {
-                tooltip.add(Component.translatable(String.format("%s.tooltip_%d", getDescriptionId(), i))
+                tooltip.accept(Component.translatable(String.format("%s.tooltip_%d", getDescriptionId(), i))
                         .withStyle(ChatFormatting.GRAY));
             }
         }

@@ -6,6 +6,7 @@ import net.anvian.gofish.entity.block.AstralCrateBlockEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 
@@ -24,7 +25,8 @@ public final class AstralCrateRenderer extends TheEndPortalRenderer<AstralCrateB
             PoseStack poseStack,
             MultiBufferSource buffer,
             int packedLight,
-            int packedOverlay) {
+            int packedOverlay,
+            @NotNull Vec3 camera) {
         renderSides(poseStack.last().pose(), buffer.getBuffer(renderType()));
     }
 

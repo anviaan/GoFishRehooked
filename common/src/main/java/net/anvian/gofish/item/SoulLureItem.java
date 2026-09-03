@@ -7,11 +7,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biomes;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class SoulLureItem extends Item implements FishingBonus {
 
@@ -28,13 +29,14 @@ public class SoulLureItem extends Item implements FishingBonus {
     public void appendHoverText(
             @NotNull ItemStack stack,
             Item.@NotNull TooltipContext context,
-            @NotNull List<Component> tooltip,
+            @NotNull TooltipDisplay tooltipDisplay,
+            @NotNull Consumer<Component> tooltip,
             @NotNull TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltip, flag);
+        super.appendHoverText(stack, context, tooltipDisplay, tooltip, flag);
 
-        tooltip.add(Component.translatable(String.format("gofish.lure.tooltip_%d", 1))
+        tooltip.accept(Component.translatable(String.format("gofish.lure.tooltip_%d", 1))
                 .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable(String.format("gofish.lots.tooltip_%d", 2), 1, " in Soul Sand Valley")
+        tooltip.accept(Component.translatable(String.format("gofish.lots.tooltip_%d", 2), 1, " in Soul Sand Valley")
                 .withStyle(ChatFormatting.GRAY));
     }
 

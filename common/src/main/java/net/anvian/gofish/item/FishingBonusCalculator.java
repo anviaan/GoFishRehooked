@@ -18,15 +18,13 @@ public final class FishingBonusCalculator {
     private FishingBonusCalculator() {}
 
     public static Bonuses collect(Level world, Player player, boolean nightLuck) {
-        boolean bonusLuck = nightLuck && world != null && world.isNight();
+        boolean bonusLuck = nightLuck && world != null && world.isDarkOutside();
         List<FishingBonus> applicable = new ArrayList<>();
         Set<Item> found = new HashSet<>();
-        for (ItemStack stack : player.getInventory().items) {
+        for (ItemStack stack : player.getInventory().getNonEquipmentItems()) {
             Item item = stack.getItem();
 
-            if (item instanceof FishingBonus bonus
-                    && !found.contains(item)
-                    && bonus.shouldApply(world, player)) {
+            if (item instanceof FishingBonus bonus && !found.contains(item) && bonus.shouldApply(world, player)) {
                 found.add(item);
                 applicable.add(bonus);
             }

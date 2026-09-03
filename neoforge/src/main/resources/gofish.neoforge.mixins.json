@@ -6,9 +6,7 @@
     "compatibilityLevel": "JAVA_21",
     "mixins": [
     ],
-    "client": [
-        "FishingBobberEntityRendererMixin"
-    ],
+    "client": [],
     "injectors": {
         "defaultRequire": 1
     }

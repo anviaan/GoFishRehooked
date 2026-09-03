@@ -14,6 +14,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -27,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 public class CrateItem extends BlockItem {
 
@@ -88,9 +90,13 @@ public class CrateItem extends BlockItem {
 
     @Override
     public void appendHoverText(
-            ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltip, flag);
-        tooltip.add(Component.translatable("gofish.crate_tooltip")
+            ItemStack stack,
+            Item.TooltipContext context,
+            TooltipDisplay tooltipDisplay,
+            Consumer<Component> tooltip,
+            TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltipDisplay, tooltip, flag);
+        tooltip.accept(Component.translatable("gofish.crate_tooltip")
                 .withStyle(ChatFormatting.GRAY)
                 .withStyle(ChatFormatting.ITALIC));
     }

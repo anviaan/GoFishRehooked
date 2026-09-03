@@ -33,7 +33,7 @@ public record FullMoonCondition() implements LootItemCondition {
         Entity entity = lootContext.getOptionalParameter(LootContextParams.THIS_ENTITY);
 
         if (entity != null) {
-            return entity.level().isNight()
+            return entity.level().isDarkOutside()
                     && entity.level().dimensionType().moonPhase(entity.level().dayTime()) == 0;
         }
 

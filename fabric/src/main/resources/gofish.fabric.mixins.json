@@ -7,9 +7,7 @@
     "mixins": [
         "PotionBrewingMixin"
     ],
-    "client": [
-        "FishingBobberEntityRendererMixin"
-    ],
+    "client": [],
     "injectors": {
         "defaultRequire": 1
     }

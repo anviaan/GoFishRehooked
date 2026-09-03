@@ -6,9 +6,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class LureItem extends Item implements FishingBonus {
 
@@ -28,12 +29,13 @@ public class LureItem extends Item implements FishingBonus {
     public void appendHoverText(
             @NotNull ItemStack stack,
             Item.@NotNull TooltipContext context,
-            @NotNull List<Component> tooltip,
+            @NotNull TooltipDisplay tooltipDisplay,
+            @NotNull Consumer<Component> tooltip,
             @NotNull TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltip, flag);
+        super.appendHoverText(stack, context, tooltipDisplay, tooltip, flag);
 
         for (int i = 1; i <= 2; i++) {
-            tooltip.add(Component.translatable(String.format("gofish.lure.tooltip_%d", i), lure)
+            tooltip.accept(Component.translatable(String.format("gofish.lure.tooltip_%d", i), lure)
                     .withStyle(ChatFormatting.GRAY));
         }
     }

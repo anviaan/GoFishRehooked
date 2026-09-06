@@ -3,6 +3,7 @@ package net.anvian.gofish.item;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.serialization.MapCodec;
+import java.util.Set;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -10,6 +11,7 @@ import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 public final class AstralCrateItemRenderer implements NoDataSpecialModelRenderer {
     private static final float COLOR = 0.2F;
@@ -23,6 +25,18 @@ public final class AstralCrateItemRenderer implements NoDataSpecialModelRenderer
             int packedOverlay,
             boolean hasFoil) {
         renderSides(poseStack.last().pose(), buffer.getBuffer(RenderType.endPortal()));
+    }
+
+    @Override
+    public void getExtents(Set<Vector3f> extents) {
+        extents.add(new Vector3f(0.0F, 0.0F, 0.0F));
+        extents.add(new Vector3f(0.0F, 0.0F, 1.0F));
+        extents.add(new Vector3f(0.0F, 1.0F, 0.0F));
+        extents.add(new Vector3f(0.0F, 1.0F, 1.0F));
+        extents.add(new Vector3f(1.0F, 0.0F, 0.0F));
+        extents.add(new Vector3f(1.0F, 0.0F, 1.0F));
+        extents.add(new Vector3f(1.0F, 1.0F, 0.0F));
+        extents.add(new Vector3f(1.0F, 1.0F, 1.0F));
     }
 
     private void renderSides(Matrix4f pose, VertexConsumer vertices) {

@@ -3,8 +3,8 @@ package net.anvian.gofish.item;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -32,9 +32,9 @@ import java.util.function.Consumer;
 
 public class CrateItem extends BlockItem {
 
-    private final ResourceLocation loot;
+    private final Identifier loot;
 
-    public CrateItem(Block block, Properties settings, ResourceLocation loot) {
+    public CrateItem(Block block, Properties settings, Identifier loot) {
         super(block, settings);
         this.loot = loot;
     }
@@ -72,7 +72,7 @@ public class CrateItem extends BlockItem {
         }
     }
 
-    private List<ItemStack> getDrops(ServerLevel world, ResourceLocation identifier, Vec3 pos) {
+    private List<ItemStack> getDrops(ServerLevel world, Identifier identifier, Vec3 pos) {
         List<ItemStack> output = new ArrayList<>();
 
         if (world != null && !world.isClientSide()) {

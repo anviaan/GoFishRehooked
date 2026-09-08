@@ -3,15 +3,17 @@ package net.anvian.gofish.item;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.serialization.MapCodec;
-import java.util.Set;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import org.joml.Vector3fc;
+
+import java.util.function.Consumer;
 
 public final class AstralCrateItemRenderer implements NoDataSpecialModelRenderer {
     private static final float COLOR = 0.2F;
@@ -26,21 +28,19 @@ public final class AstralCrateItemRenderer implements NoDataSpecialModelRenderer
             boolean hasFoil,
             int outlineColor) {
         submitNodeCollector.submitCustomGeometry(
-                poseStack,
-                RenderType.endPortal(),
-                (pose, vertices) -> renderSides(pose.pose(), vertices));
+                poseStack, RenderTypes.endPortal(), (pose, vertices) -> renderSides(pose.pose(), vertices));
     }
 
     @Override
-    public void getExtents(Set<Vector3f> extents) {
-        extents.add(new Vector3f(0.0F, 0.0F, 0.0F));
-        extents.add(new Vector3f(0.0F, 0.0F, 1.0F));
-        extents.add(new Vector3f(0.0F, 1.0F, 0.0F));
-        extents.add(new Vector3f(0.0F, 1.0F, 1.0F));
-        extents.add(new Vector3f(1.0F, 0.0F, 0.0F));
-        extents.add(new Vector3f(1.0F, 0.0F, 1.0F));
-        extents.add(new Vector3f(1.0F, 1.0F, 0.0F));
-        extents.add(new Vector3f(1.0F, 1.0F, 1.0F));
+    public void getExtents(Consumer<Vector3fc> extents) {
+        extents.accept(new Vector3f(0.0F, 0.0F, 0.0F));
+        extents.accept(new Vector3f(0.0F, 0.0F, 1.0F));
+        extents.accept(new Vector3f(0.0F, 1.0F, 0.0F));
+        extents.accept(new Vector3f(0.0F, 1.0F, 1.0F));
+        extents.accept(new Vector3f(1.0F, 0.0F, 0.0F));
+        extents.accept(new Vector3f(1.0F, 0.0F, 1.0F));
+        extents.accept(new Vector3f(1.0F, 1.0F, 0.0F));
+        extents.accept(new Vector3f(1.0F, 1.0F, 1.0F));
     }
 
     private void renderSides(Matrix4f pose, VertexConsumer vertices) {

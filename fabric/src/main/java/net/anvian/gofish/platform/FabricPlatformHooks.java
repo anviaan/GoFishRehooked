@@ -14,7 +14,7 @@ import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -57,7 +57,7 @@ public final class FabricPlatformHooks implements IPlatformHooks {
     }
 
     @Override
-    public Item createCrateItem(Block block, Item.Properties properties, ResourceLocation lootTable) {
+    public Item createCrateItem(Block block, Item.Properties properties, Identifier lootTable) {
         return new CrateItem(block, properties, lootTable);
     }
 
@@ -68,7 +68,7 @@ public final class FabricPlatformHooks implements IPlatformHooks {
 
     @Override
     public <V, T extends V> PlatformRegistryObject<T> register(
-            Registry<V> registry, ResourceLocation id, Supplier<T> supplier) {
+            Registry<V> registry, Identifier id, Supplier<T> supplier) {
         PlatformRegistryObject<T> object = new PlatformRegistryObject<>(id);
         object.set(Registry.register(registry, id, supplier.get()));
         return object;

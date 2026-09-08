@@ -12,7 +12,7 @@ import net.anvian.gofish.registry.GoFishParticles;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -58,24 +58,24 @@ public final class GoFish {
 
         register(
                 BuiltInRegistries.CREATIVE_MODE_TAB,
-                GoFishConstants.ITEM_GROUP.location(),
+                GoFishConstants.ITEM_GROUP.identifier(),
                 () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                         .icon(() -> new ItemStack(GoFishItems.GOLDEN_FISH.get()))
                         .title(Component.translatable("itemGroup.gofish.group"))
                         .displayItems((parameters, output) -> {
-                            Set<ResourceLocation> orderedItems = new HashSet<>();
+                            Set<Identifier> orderedItems = new HashSet<>();
 
                             GoFishConstants.CREATIVE_ITEM_ORDER.forEach(name -> {
-                                ResourceLocation itemId = id(name);
+                                Identifier itemId = id(name);
                                 output.accept(BuiltInRegistries.ITEM.getValue(itemId));
                                 orderedItems.add(itemId);
                             });
 
                             BuiltInRegistries.ITEM.entrySet().stream()
                                     .filter(entry -> GoFishConstants.MOD_ID.equals(
-                                            entry.getKey().location().getNamespace()))
+                                            entry.getKey().identifier().getNamespace()))
                                     .filter(entry -> !orderedItems.contains(
-                                            entry.getKey().location()))
+                                            entry.getKey().identifier()))
                                     .forEach(entry -> output.accept(entry.getValue()));
                         })
                         .build());
@@ -83,11 +83,11 @@ public final class GoFish {
         hooks.registerPlatformHooks();
     }
 
-    public static ResourceLocation id(String name) {
-        return ResourceLocation.fromNamespaceAndPath(GoFishConstants.MOD_ID, name);
+    public static Identifier id(String name) {
+        return Identifier.fromNamespaceAndPath(GoFishConstants.MOD_ID, name);
     }
 
-    public static Item createCrateItem(Block block, Item.Properties properties, ResourceLocation lootTable) {
+    public static Item createCrateItem(Block block, Item.Properties properties, Identifier lootTable) {
         if (platform == null) {
             throw new IllegalStateException("Go Fish platform hooks were not initialized");
         }
@@ -104,7 +104,7 @@ public final class GoFish {
     }
 
     public static <V, T extends V> PlatformRegistryObject<T> register(
-            Registry<V> registry, ResourceLocation id, java.util.function.Supplier<T> supplier) {
+            Registry<V> registry, Identifier id, java.util.function.Supplier<T> supplier) {
         if (platform == null) {
             throw new IllegalStateException("Go Fish platform hooks were not initialized");
         }

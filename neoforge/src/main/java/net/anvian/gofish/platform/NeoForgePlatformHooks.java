@@ -11,7 +11,7 @@ import net.anvian.gofish.registry.GoFishItems;
 import net.anvian.gofish.registry.GoFishLootHandler;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.PotionBrewing;
@@ -42,7 +42,7 @@ public final class NeoForgePlatformHooks implements IPlatformHooks {
 
     @Override
     public <V, T extends V> PlatformRegistryObject<T> register(
-            Registry<V> registry, ResourceLocation id, Supplier<T> supplier) {
+            Registry<V> registry, Identifier id, Supplier<T> supplier) {
         PlatformRegistryObject<T> object = new PlatformRegistryObject<>(id);
         registrations.add(new Registration(registry.key(), id, supplier, object));
         return object;
@@ -112,7 +112,7 @@ public final class NeoForgePlatformHooks implements IPlatformHooks {
     }
 
     @Override
-    public Item createCrateItem(Block block, Item.Properties properties, ResourceLocation lootTable) {
+    public Item createCrateItem(Block block, Item.Properties properties, Identifier lootTable) {
         return block instanceof AstralCrateBlock
                 ? new NeoForgeAstralCrateItem(block, properties, lootTable)
                 : new CrateItem(block, properties, lootTable);
@@ -126,7 +126,7 @@ public final class NeoForgePlatformHooks implements IPlatformHooks {
 
     private record Registration(
             ResourceKey<? extends Registry<?>> registryKey,
-            ResourceLocation id,
+            Identifier id,
             Supplier<?> supplier,
             PlatformRegistryObject<?> object) {}
 }

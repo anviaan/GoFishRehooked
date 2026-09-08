@@ -10,8 +10,8 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -48,10 +48,11 @@ public class FishCommand {
                 .create(LootContextParamSets.FISHING);
 
         LootTable table;
-        final DimensionType dimension = world.dimensionType();
-        if (dimension.ultraWarm()) {
+        if (world.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, player.blockPosition())) {
             table = world.getServer().reloadableRegistries().getLootTable(GoFishLootTables.NETHER_FISHING);
-        } else if (!dimension.bedWorks()) {
+        } else if (world.environmentAttributes()
+                .getValue(EnvironmentAttributes.BED_RULE, player.blockPosition())
+                .explodes()) {
             table = world.getServer().reloadableRegistries().getLootTable(GoFishLootTables.END_FISHING);
         } else {
             table = world.getServer().reloadableRegistries().getLootTable(GoFishLootTables.OVERWORLD_FISHING);

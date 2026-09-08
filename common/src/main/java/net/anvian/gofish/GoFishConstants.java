@@ -1,8 +1,8 @@
 package net.anvian.gofish;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public final class GoFishConstants {
     public static final String MOD_NAME = "Go Fish Rehooked";
     public static final String MOD_VERSION = "2.0.0";
     public static final ResourceKey<CreativeModeTab> ITEM_GROUP =
-            ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(MOD_ID, "group"));
+            ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath(MOD_ID, "group"));
     static final List<String> CREATIVE_ITEM_ORDER = List.of(
             // Fishing rods
             "blaze_rod",
@@ -91,6 +91,5 @@ public final class GoFishConstants {
             "thundering_bass",
             "blizzard_bass",
             "cloudy_crab",
-            "smoked_cloudy_crab"
-    );
+            "smoked_cloudy_crab");
 }

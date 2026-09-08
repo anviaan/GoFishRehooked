@@ -1,18 +1,12 @@
 package net.anvian.gofish.mixin;
 
 import net.anvian.gofish.api.FireproofEntity;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FishingHook.class)
 public abstract class FishingBobberFireproofMixin extends Entity implements FireproofEntity {
@@ -22,26 +16,20 @@ public abstract class FishingBobberFireproofMixin extends Entity implements Fire
     }
 
     @Unique
-    private static final EntityDataAccessor<Boolean> GF_FIRE_IMMUNE =
-            SynchedEntityData.defineId(FishingBobberFireproofMixin.class, EntityDataSerializers.BOOLEAN);
-
-    @Inject(method = "defineSynchedData", at = @At("RETURN"))
-    private void registerFireImmuneTracker(SynchedEntityData.Builder builder, CallbackInfo ci) {
-        builder.define(GF_FIRE_IMMUNE, false);
-    }
+    private boolean gfFireImmune;
 
     @Override
     public boolean isOnFire() {
-        return !entityData.get(GF_FIRE_IMMUNE) && super.isOnFire();
+        return !gfFireImmune && super.isOnFire();
     }
 
     @Override
     public boolean gfIsFireproof() {
-        return entityData.get(GF_FIRE_IMMUNE);
+        return gfFireImmune;
     }
 
     @Override
     public void gfSetFireproof(boolean value) {
-        entityData.set(GF_FIRE_IMMUNE, value);
+        gfFireImmune = value;
     }
 }

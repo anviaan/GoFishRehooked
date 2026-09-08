@@ -1,16 +1,16 @@
 package net.anvian.gofish.platform;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 
 public final class PlatformRegistryObject<T> implements Supplier<T> {
 
-    private final ResourceLocation id;
+    private final Identifier id;
     private final AtomicReference<T> value = new AtomicReference<>();
 
-    public PlatformRegistryObject(ResourceLocation id) {
+    public PlatformRegistryObject(Identifier id) {
         this.id = id;
     }
 

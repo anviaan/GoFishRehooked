@@ -4,7 +4,9 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.MapCodec;
 import net.anvian.gofish.registry.GoFishLoot;
 import net.minecraft.util.context.ContextKey;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.MoonPhase;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -34,7 +36,10 @@ public record FullMoonCondition() implements LootItemCondition {
 
         if (entity != null) {
             return entity.level().isDarkOutside()
-                    && entity.level().dimensionType().moonPhase(entity.level().dayTime()) == 0;
+                    && entity.level()
+                                    .environmentAttributes()
+                                    .getValue(EnvironmentAttributes.MOON_PHASE, entity.position())
+                            == MoonPhase.FULL_MOON;
         }
 
         return false;

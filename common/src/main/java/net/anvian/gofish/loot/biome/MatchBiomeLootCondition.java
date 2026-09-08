@@ -82,7 +82,7 @@ public record MatchBiomeLootCondition(Optional<BiomeTagPredicate> category, Opti
         List<String> stringBiomes = new ArrayList<>();
 
         categories.forEach(category -> stringCats.add(category.location().toString()));
-        biomes.forEach(biome -> stringBiomes.add(biome.location().toString()));
+        biomes.forEach(biome -> stringBiomes.add(biome.identifier().toString()));
 
         return builder(
                 BiomeTagPredicate.Builder.create().setValidByString(stringCats),

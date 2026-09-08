@@ -6,8 +6,8 @@ import net.anvian.gofish.block.CrateBlock;
 import net.anvian.gofish.platform.PlatformRegistryObject;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -103,7 +103,7 @@ public class GoFishBlocks {
     }
 
     public static <T extends Block> PlatformRegistryObject<T> registerCrate(
-            String name, Supplier<T> block, Item.Properties settings, ResourceLocation id) {
+            String name, Supplier<T> block, Item.Properties settings, Identifier id) {
         settings.setId(ResourceKey.create(Registries.ITEM, GoFish.id(name)));
         PlatformRegistryObject<T> registeredBlock = GoFish.register(BuiltInRegistries.BLOCK, GoFish.id(name), block);
         GoFish.register(

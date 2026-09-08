@@ -6,12 +6,12 @@ import net.anvian.gofish.impl.GoFishLootTables;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.ReloadableServerRegistries;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootTable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -40,10 +40,11 @@ public abstract class FishingBobberLootMixin extends Entity {
             return level().getServer().reloadableRegistries().getLootTable(BuiltInLootTables.FISHING);
         }
 
-        final DimensionType dimension = level().dimensionType();
-        if (dimension.ultraWarm()) {
+        if (level().environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, blockPosition())) {
             return this.level().getServer().reloadableRegistries().getLootTable(GoFishLootTables.NETHER_FISHING);
-        } else if (!dimension.bedWorks()) {
+        } else if (level().environmentAttributes()
+                .getValue(EnvironmentAttributes.BED_RULE, blockPosition())
+                .explodes()) {
             return this.level().getServer().reloadableRegistries().getLootTable(GoFishLootTables.END_FISHING);
         }
 
@@ -54,7 +55,7 @@ public abstract class FishingBobberLootMixin extends Entity {
             method = "retrieve",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/ItemEntity;setDeltaMovement(DDD)V"))
     private void setFireproof(ItemEntity itemEntity, double x, double y, double z) {
-        if (level().dimensionType().ultraWarm()) {
+        if (level().environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, blockPosition())) {
             ((FireproofEntity) itemEntity).gfSetFireproof(true);
         }
         itemEntity.setDeltaMovement(x, y, z);

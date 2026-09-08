@@ -4,8 +4,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public record BiomePredicate(List<ResourceKey<Biome>> valid) {
             List<ResourceKey<Biome>> rKeys = new ArrayList<>();
             for (String str : valid) {
                 if (!valid.isEmpty()) {
-                    rKeys.add(ResourceKey.create(Registries.BIOME, ResourceLocation.parse(str)));
+                    rKeys.add(ResourceKey.create(Registries.BIOME, Identifier.parse(str)));
                 }
             }
 
@@ -68,7 +68,7 @@ public record BiomePredicate(List<ResourceKey<Biome>> valid) {
 
         public Builder add(String biome) {
             if (!biome.isEmpty()) {
-                valid.add(ResourceKey.create(Registries.BIOME, ResourceLocation.parse(biome)));
+                valid.add(ResourceKey.create(Registries.BIOME, Identifier.parse(biome)));
             }
 
             return this;

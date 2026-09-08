@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 
@@ -52,14 +52,14 @@ public record BiomeTagPredicate(List<TagKey<Biome>> valid) {
         public Builder setValidByString(List<String> valid) {
             List<TagKey<Biome>> tagKeys = new ArrayList<>();
             for (String str : valid) {
-                tagKeys.add(TagKey.create(Registries.BIOME, ResourceLocation.parse(str)));
+                tagKeys.add(TagKey.create(Registries.BIOME, Identifier.parse(str)));
             }
             return setValid(tagKeys);
         }
 
         public Builder add(String tag) {
             if (!tag.isEmpty()) {
-                this.valid.add(TagKey.create(Registries.BIOME, ResourceLocation.parse(tag)));
+                this.valid.add(TagKey.create(Registries.BIOME, Identifier.parse(tag)));
             }
 
             return this;

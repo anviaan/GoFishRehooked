@@ -18,7 +18,7 @@ public final class GoFishFabricClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.putBlock(GoFishBlocks.ASTRAL_CRATE.get(), ChunkSectionLayer.CUTOUT);
-        BlockEntityRenderers.register(GoFishEntities.ASTRAL_CRATE.get(), AstralCrateRenderer::new);
+        BlockEntityRenderers.register(GoFishEntities.ASTRAL_CRATE.get(), context -> new AstralCrateRenderer());
         SpecialModelRenderers.ID_MAPPER.put(
                 GoFish.id("astral_crate"), AstralCrateItemRenderer.Unbaked.MAP_CODEC);
         ParticleFactoryRegistry.getInstance().register(GoFishParticles.LAVA_FISHING.get(), WakeParticle.Provider::new);

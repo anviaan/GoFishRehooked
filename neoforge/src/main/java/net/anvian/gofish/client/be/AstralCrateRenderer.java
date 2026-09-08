@@ -3,31 +3,36 @@ package net.anvian.gofish.client.be;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.anvian.gofish.entity.block.AstralCrateBlockEntity;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.blockentity.AbstractEndPortalRenderer;
+import net.minecraft.client.renderer.blockentity.state.EndPortalRenderState;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 
-public final class AstralCrateRenderer extends TheEndPortalRenderer<AstralCrateBlockEntity> {
+public final class AstralCrateRenderer extends AbstractEndPortalRenderer<AstralCrateBlockEntity, EndPortalRenderState> {
 
     private record Vertex(float x, float y, float z) {}
 
-    public AstralCrateRenderer(BlockEntityRendererProvider.Context context) {
-        super(context);
+    public AstralCrateRenderer() {
+        super();
     }
 
     @Override
-    public void render(
-            @NotNull AstralCrateBlockEntity entity,
-            float partialTick,
-            PoseStack poseStack,
-            MultiBufferSource buffer,
-            int packedLight,
-            int packedOverlay,
-            @NotNull Vec3 camera) {
-        renderSides(poseStack.last().pose(), buffer.getBuffer(renderType()));
+    public @NotNull EndPortalRenderState createRenderState() {
+        return new EndPortalRenderState();
+    }
+
+    @Override
+    public void submit(
+            @NotNull EndPortalRenderState renderState,
+            @NotNull PoseStack poseStack,
+            SubmitNodeCollector submitNodeCollector,
+            @NotNull CameraRenderState cameraRenderState) {
+        submitNodeCollector.submitCustomGeometry(
+                poseStack,
+                renderType(),
+                (pose, vertices) -> renderSides(pose.pose(), vertices));
     }
 
     private void renderSides(Matrix4f pose, VertexConsumer vertices) {

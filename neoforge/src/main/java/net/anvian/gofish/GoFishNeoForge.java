@@ -10,7 +10,7 @@ import net.neoforged.fml.loading.FMLEnvironment;
 public final class GoFishNeoForge {
     public GoFishNeoForge(IEventBus modEventBus) {
         GoFish.init(new NeoForgePlatformHooks(modEventBus));
-        if (FMLEnvironment.dist == Dist.CLIENT) {
+        if (FMLEnvironment.getDist() == Dist.CLIENT) {
             GoFishNeoForgeClient.register(modEventBus);
         }
     }

@@ -62,7 +62,7 @@ public class CrateItem extends BlockItem {
     }
 
     private void openCrate(Level world, Player user, InteractionHand hand) {
-        if (!world.isClientSide) {
+        if (!world.isClientSide()) {
             getDrops((ServerLevel) world, loot, user.position())
                     .forEach(stack -> Containers.dropItemStack(world, user.getX(), user.getY(), user.getZ(), stack));
 
@@ -75,7 +75,7 @@ public class CrateItem extends BlockItem {
     private List<ItemStack> getDrops(ServerLevel world, ResourceLocation identifier, Vec3 pos) {
         List<ItemStack> output = new ArrayList<>();
 
-        if (world != null && !world.isClientSide) {
+        if (world != null && !world.isClientSide()) {
             LootTable supplier = Objects.requireNonNull(world.getServer())
                     .reloadableRegistries()
                     .getLootTable(ResourceKey.create(Registries.LOOT_TABLE, identifier));

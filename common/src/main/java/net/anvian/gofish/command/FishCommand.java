@@ -5,6 +5,7 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.anvian.gofish.impl.GoFishLootTables;
+import net.anvian.gofish.util.PermissionChecks;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerLevel;
@@ -23,7 +24,7 @@ public class FishCommand {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("fish")
-                .requires(source -> source.hasPermission(2))
+                .requires(PermissionChecks::hasPermission)
                 .executes(context -> {
                     fish(context, 1);
                     return 1;

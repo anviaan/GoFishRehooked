@@ -3,28 +3,33 @@ package net.anvian.gofish.client.item;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.serialization.MapCodec;
-import java.util.Set;
-import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
+import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+
+import java.util.Set;
 
 public final class AstralCrateItemRenderer implements NoDataSpecialModelRenderer {
     private static final float COLOR = 0.2F;
 
     @Override
-    public void render(
-            ItemDisplayContext displayContext,
-            PoseStack poseStack,
-            MultiBufferSource buffer,
+    public void submit(
+            @NotNull ItemDisplayContext displayContext,
+            @NotNull PoseStack poseStack,
+            SubmitNodeCollector submitNodeCollector,
             int packedLight,
             int packedOverlay,
-            boolean hasFoil) {
-        renderSides(poseStack.last().pose(), buffer.getBuffer(RenderType.endPortal()));
+            boolean hasFoil,
+            int outlineColor) {
+        submitNodeCollector.submitCustomGeometry(
+                poseStack,
+                RenderType.endPortal(),
+                (pose, vertices) -> renderSides(pose.pose(), vertices));
     }
 
     @Override
@@ -61,7 +66,7 @@ public final class AstralCrateItemRenderer implements NoDataSpecialModelRenderer
         private Unbaked() {}
 
         @Override
-        public SpecialModelRenderer<?> bake(EntityModelSet modelSet) {
+        public SpecialModelRenderer<?> bake(SpecialModelRenderer.BakingContext context) {
             return new AstralCrateItemRenderer();
         }
 

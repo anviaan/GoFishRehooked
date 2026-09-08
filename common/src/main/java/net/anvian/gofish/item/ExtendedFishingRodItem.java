@@ -69,7 +69,7 @@ public class ExtendedFishingRodItem extends FishingRodItem {
 
     private void handleRetrieve(
             Level world, Player user, InteractionHand hand, ItemStack heldStack, RandomSource random) {
-        if (!world.isClientSide) {
+        if (!world.isClientSide()) {
             int damage = user.fishing.retrieve(heldStack);
             heldStack.hurtAndBreak(
                     damage, user, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
@@ -81,7 +81,7 @@ public class ExtendedFishingRodItem extends FishingRodItem {
     private void handleCast(Level world, Player user, ItemStack heldStack, RandomSource random) {
         playSound(world, user, random, config.cast);
 
-        if (!world.isClientSide) {
+        if (!world.isClientSide()) {
             spawnBobber(world, user, heldStack);
         }
 

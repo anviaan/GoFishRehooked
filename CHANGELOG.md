@@ -1,1 +1,1 @@
-- Port to 1.21.6
+- Port to 1.21.10 with support for Minecraft [1.21.9, 1.21.10]

@@ -24,7 +24,7 @@ public final class GoFishNeoForgeClient {
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(
                 () -> {
-                    BlockEntityRenderers.register(GoFishEntities.ASTRAL_CRATE.get(), AstralCrateRenderer::new);
+                    BlockEntityRenderers.register(GoFishEntities.ASTRAL_CRATE.get(), context -> new AstralCrateRenderer());
                 });
     }
 

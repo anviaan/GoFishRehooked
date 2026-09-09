@@ -1,6 +1,9 @@
 package net.anvian.gofish.registry;
 
+import net.anvian.anvianslib.util.RegistryUtil;
+import net.anvian.anvianslib.util.TimeUtil;
 import net.anvian.gofish.GoFish;
+import net.anvian.gofish.GoFishConstants;
 import net.anvian.gofish.api.SoundInstance;
 import net.anvian.gofish.item.ExtendedFishingRodItem;
 import net.anvian.gofish.item.LureItem;
@@ -10,7 +13,6 @@ import net.anvian.gofish.platform.PlatformRegistryObject;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -372,7 +374,8 @@ public class GoFishItems {
                                     .nutrition(5)
                                     .saturationModifier(0.75f)
                                     .build(),
-                            foodWithEffect(new MobEffectInstance(MobEffects.SPEED, 15 * 20), 1.0F))));
+                            foodWithEffect(
+                                    new MobEffectInstance(MobEffects.SPEED, TimeUtil.secondsToTicks(15)), 1.0F))));
     public static final PlatformRegistryObject<Item> SMOKED_CLOUDY_CRAB = register(
             "smoked_cloudy_crab",
             () -> new Item(itemProperties("smoked_cloudy_crab")
@@ -403,7 +406,7 @@ public class GoFishItems {
     }
 
     private static Item.Properties itemProperties(String name) {
-        return new Item.Properties().setId(ResourceKey.create(Registries.ITEM, GoFish.id(name)));
+        return new Item.Properties().setId(RegistryUtil.key(Registries.ITEM, GoFishConstants.MOD_ID, name));
     }
 
     private static Consumable foodWithEffect(MobEffectInstance effect, float probability) {

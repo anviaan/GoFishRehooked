@@ -96,8 +96,7 @@ public abstract class FishingBobberLavaFishingMixin extends Entity {
             at =
                     @At(
                             value = "INVOKE",
-                            target =
-                                    "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z",
+                            target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z",
                             ordinal = 0),
             locals = LocalCapture.CAPTURE_FAILHARD)
     @SuppressWarnings("java:S107")
@@ -132,8 +131,7 @@ public abstract class FishingBobberLavaFishingMixin extends Entity {
             at =
                     @At(
                             value = "INVOKE",
-                            target =
-                                    "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z",
+                            target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z",
                             ordinal = 1),
             locals = LocalCapture.CAPTURE_FAILHARD)
     @SuppressWarnings("java:S107")

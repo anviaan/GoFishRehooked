@@ -1,10 +1,10 @@
 package net.anvian.gofish.item;
 
+import net.anvian.anvianslib.util.RegistryUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -24,6 +24,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,8 @@ public class CrateItem extends BlockItem {
         if (world != null && !world.isClientSide()) {
             LootTable supplier = Objects.requireNonNull(world.getServer())
                     .reloadableRegistries()
-                    .getLootTable(ResourceKey.create(Registries.LOOT_TABLE, identifier));
+                    .getLootTable(
+                            RegistryUtil.key(Registries.LOOT_TABLE, identifier.getNamespace(), identifier.getPath()));
             LootParams.Builder builder = new LootParams.Builder(world).withParameter(LootContextParams.ORIGIN, pos);
 
             List<ItemStack> stacks = supplier.getRandomItems(builder.create(LootContextParamSets.CHEST));
@@ -90,11 +92,11 @@ public class CrateItem extends BlockItem {
 
     @Override
     public void appendHoverText(
-            ItemStack stack,
-            Item.TooltipContext context,
-            TooltipDisplay tooltipDisplay,
-            Consumer<Component> tooltip,
-            TooltipFlag flag) {
+            @NonNull ItemStack stack,
+            Item.@NonNull TooltipContext context,
+            @NonNull TooltipDisplay tooltipDisplay,
+            @NonNull Consumer<Component> tooltip,
+            @NonNull TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltipDisplay, tooltip, flag);
         tooltip.accept(Component.translatable("gofish.crate_tooltip")
                 .withStyle(ChatFormatting.GRAY)

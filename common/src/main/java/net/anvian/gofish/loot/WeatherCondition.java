@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.anvian.gofish.registry.GoFishLoot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.Entity;
@@ -12,7 +11,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,8 +28,8 @@ public record WeatherCondition(Optional<Boolean> raining, Optional<Boolean> thun
             .apply(instance, WeatherCondition::new));
 
     @Override
-    public @NotNull LootItemConditionType getType() {
-        return GoFishLoot.WEATHER.get();
+    public @NotNull MapCodec<WeatherCondition> codec() {
+        return CODEC;
     }
 
     @Override

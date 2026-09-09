@@ -1,13 +1,14 @@
 package net.anvian.gofish.registry;
 
+import net.anvian.anvianslib.util.RegistryUtil;
 import net.anvian.gofish.GoFish;
+import net.anvian.gofish.GoFishConstants;
 import net.anvian.gofish.block.AstralCrateBlock;
 import net.anvian.gofish.block.CrateBlock;
 import net.anvian.gofish.platform.PlatformRegistryObject;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -99,12 +100,12 @@ public class GoFishBlocks {
     }
 
     private static BlockBehaviour.Properties blockProperties(String name, BlockBehaviour.Properties properties) {
-        return properties.setId(ResourceKey.create(Registries.BLOCK, GoFish.id(name)));
+        return properties.setId(RegistryUtil.key(Registries.BLOCK, GoFishConstants.MOD_ID, name));
     }
 
     public static <T extends Block> PlatformRegistryObject<T> registerCrate(
             String name, Supplier<T> block, Item.Properties settings, Identifier id) {
-        settings.setId(ResourceKey.create(Registries.ITEM, GoFish.id(name)));
+        settings.setId(RegistryUtil.key(Registries.ITEM, GoFishConstants.MOD_ID, name));
         PlatformRegistryObject<T> registeredBlock = GoFish.register(BuiltInRegistries.BLOCK, GoFish.id(name), block);
         GoFish.register(
                 BuiltInRegistries.ITEM,
@@ -115,7 +116,7 @@ public class GoFishBlocks {
 
     public static <T extends Block> PlatformRegistryObject<T> register(
             String name, Supplier<T> block, Item.Properties settings) {
-        settings.setId(ResourceKey.create(Registries.ITEM, GoFish.id(name)));
+        settings.setId(RegistryUtil.key(Registries.ITEM, GoFishConstants.MOD_ID, name));
         PlatformRegistryObject<T> registeredBlock = GoFish.register(BuiltInRegistries.BLOCK, GoFish.id(name), block);
         GoFish.register(BuiltInRegistries.ITEM, GoFish.id(name), () -> new BlockItem(registeredBlock.get(), settings));
         return registeredBlock;

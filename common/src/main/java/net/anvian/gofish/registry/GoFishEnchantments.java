@@ -1,5 +1,7 @@
 package net.anvian.gofish.registry;
 
+import net.anvian.anvianslib.util.RegistryUtil;
+import net.anvian.gofish.GoFishConstants;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
@@ -10,7 +12,7 @@ public final class GoFishEnchantments {
     private GoFishEnchantments() {}
 
     public static final ResourceKey<Enchantment> DEEPFRY =
-            ResourceKey.create(Registries.ENCHANTMENT, net.anvian.gofish.GoFish.id("deepfry"));
+            RegistryUtil.key(Registries.ENCHANTMENT, GoFishConstants.MOD_ID, "deepfry");
 
     public static Holder<Enchantment> getDeepfryHolder(RegistryAccess registryAccess) {
         return registryAccess.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(DEEPFRY);

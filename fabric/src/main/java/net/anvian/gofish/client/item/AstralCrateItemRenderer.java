@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
-import net.minecraft.world.item.ItemDisplayContext;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
@@ -20,7 +19,6 @@ public final class AstralCrateItemRenderer implements NoDataSpecialModelRenderer
 
     @Override
     public void submit(
-            @NotNull ItemDisplayContext displayContext,
             @NotNull PoseStack poseStack,
             SubmitNodeCollector submitNodeCollector,
             int packedLight,
@@ -59,13 +57,13 @@ public final class AstralCrateItemRenderer implements NoDataSpecialModelRenderer
         vertices.addVertex(pose, quad.x1(), quad.y2(), quad.z4()).setColor(COLOR, COLOR, COLOR, 1.0F);
     }
 
-    public static final class Unbaked implements SpecialModelRenderer.Unbaked {
+    public static final class Unbaked implements NoDataSpecialModelRenderer.Unbaked {
         public static final MapCodec<Unbaked> MAP_CODEC = MapCodec.unit(new Unbaked());
 
         private Unbaked() {}
 
         @Override
-        public SpecialModelRenderer<?> bake(SpecialModelRenderer.BakingContext context) {
+        public NoDataSpecialModelRenderer bake(SpecialModelRenderer.BakingContext context) {
             return new AstralCrateItemRenderer();
         }
 

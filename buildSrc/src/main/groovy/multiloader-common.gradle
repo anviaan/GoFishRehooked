@@ -24,19 +24,6 @@ repositories {
         }
         filter { includeGroupAndSubgroups('org.spongepowered') }
     }
-    exclusiveContent {
-        forRepositories(
-                maven {
-                    name = 'ParchmentMC'
-                    url = 'https://maven.parchmentmc.org/'
-                },
-                maven {
-                    name = 'NeoForge'
-                    url = 'https://maven.neoforged.net/releases'
-                }
-        )
-        filter { includeGroup('org.parchmentmc.data') }
-    }
     maven {
         name = 'BlameJared Maven'
         url = 'https://maven.blamejared.com'
@@ -44,14 +31,6 @@ repositories {
     maven {
         name = 'Reposilite Anvian'
         url = 'https://maven.anvian.net/releases'
-    }
-}
-
-configurations.configureEach {
-    if (canBeConsumed && name in ['apiElements', 'runtimeElements', 'sourcesElements', 'javadocElements']) {
-        outgoing.capability("${group}:${base.archivesName.get()}:${version}")
-        outgoing.capability("${group}:${mod_id}-${project.name}-${minecraft_version}:${version}")
-        outgoing.capability("${group}:${mod_id}:${version}")
     }
 }
 

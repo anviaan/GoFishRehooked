@@ -3,7 +3,7 @@ name: Mod Publish
 on: [ workflow_dispatch ]
 
 env:
-  JAVA_VERSION: 21
+  JAVA_VERSION: 25
   MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
   CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
   MODRINTH_ID: nGvPJWKu

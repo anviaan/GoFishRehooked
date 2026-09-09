@@ -3,7 +3,6 @@ package net.anvian.gofish.loot.biome;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.anvian.gofish.registry.GoFishLoot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
@@ -13,7 +12,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,8 +34,8 @@ public record MatchBiomeLootCondition(Optional<BiomeTagPredicate> category, Opti
                     .apply(instance, MatchBiomeLootCondition::new));
 
     @Override
-    public @NotNull LootItemConditionType getType() {
-        return GoFishLoot.MATCH_BIOME.get();
+    public @NotNull MapCodec<MatchBiomeLootCondition> codec() {
+        return CODEC;
     }
 
     @Override

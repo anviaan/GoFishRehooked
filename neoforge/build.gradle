@@ -9,10 +9,6 @@ neoForge {
     if (at.exists()) {
         accessTransformers.from(at.absolutePath)
     }
-    parchment {
-        minecraftVersion = parchment_minecraft
-        mappingsVersion = parchment_version
-    }
     runs {
         configureEach {
             systemProperty('neoforge.enabledGameTestNamespaces', mod_id)
@@ -20,13 +16,17 @@ neoForge {
         }
         client {
             client()
+            gameDirectory = this.mkdir(this.file("runs/client"))
         }
         data {
             clientData()
+            gameDirectory = this.mkdir(this.file("runs/data"))
             programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
         }
         server {
             server()
+            this.file("runs/server").createParentDirectories()
+            gameDirectory = this.mkdir(this.file("runs/server"))
         }
     }
     mods {
@@ -42,4 +42,21 @@ sourceSets.main.resources {
 
 dependencies {
     implementation "net.anvian.anvianslib:anvianslib-neoforge-${anvianslib_minecraft_version}:${anvianslib_version}"
+}
+
+def loaderAttribute = Attribute.of('io.github.mcgradleconventions.loader', String)
+['apiElements', 'runtimeElements', 'sourcesElements', 'javadocElements'].each { variant ->
+    configurations.named(variant) {
+        attributes { attribute(loaderAttribute, 'neoforge') }
+    }
+}
+sourceSets.configureEach {
+    [it.compileClasspathConfigurationName, it.runtimeClasspathConfigurationName].each { variant ->
+        configurations.named(variant) {
+            attributes { attribute(loaderAttribute, 'neoforge') }
+        }
+    }
+}
+configurations.named('jarJar') {
+    attributes { attribute(loaderAttribute, 'neoforge') }
 }

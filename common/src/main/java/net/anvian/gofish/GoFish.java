@@ -17,12 +17,14 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public final class GoFish {
 
@@ -62,25 +64,25 @@ public final class GoFish {
                 () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                         .icon(() -> new ItemStack(GoFishItems.GOLDEN_FISH.get()))
                         .title(Component.translatable("itemGroup.gofish.group"))
-                        .displayItems((parameters, output) -> {
-                            Set<Identifier> orderedItems = new HashSet<>();
-
-                            GoFishConstants.CREATIVE_ITEM_ORDER.forEach(name -> {
-                                Identifier itemId = id(name);
-                                output.accept(BuiltInRegistries.ITEM.getValue(itemId));
-                                orderedItems.add(itemId);
-                            });
-
-                            BuiltInRegistries.ITEM.entrySet().stream()
-                                    .filter(entry -> GoFishConstants.MOD_ID.equals(
-                                            entry.getKey().identifier().getNamespace()))
-                                    .filter(entry -> !orderedItems.contains(
-                                            entry.getKey().identifier()))
-                                    .forEach(entry -> output.accept(entry.getValue()));
-                        })
                         .build());
 
         hooks.registerPlatformHooks();
+    }
+
+    public static void addCreativeItems(Consumer<ItemLike> add) {
+        Set<Identifier> orderedItems = new HashSet<>();
+
+        GoFishConstants.CREATIVE_ITEM_ORDER.forEach(name -> {
+            Identifier itemId = id(name);
+            add.accept(BuiltInRegistries.ITEM.getValue(itemId));
+            orderedItems.add(itemId);
+        });
+
+        BuiltInRegistries.ITEM.entrySet().stream()
+                .filter(entry -> GoFishConstants.MOD_ID.equals(
+                        entry.getKey().identifier().getNamespace()))
+                .filter(entry -> !orderedItems.contains(entry.getKey().identifier()))
+                .forEach(entry -> add.accept(entry.getValue()));
     }
 
     public static Identifier id(String name) {

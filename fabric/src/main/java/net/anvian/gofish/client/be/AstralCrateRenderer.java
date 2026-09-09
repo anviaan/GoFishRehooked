@@ -6,7 +6,8 @@ import net.anvian.gofish.entity.block.AstralCrateBlockEntity;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.AbstractEndPortalRenderer;
 import net.minecraft.client.renderer.blockentity.state.EndPortalRenderState;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 
@@ -29,9 +30,7 @@ public final class AstralCrateRenderer extends AbstractEndPortalRenderer<AstralC
             SubmitNodeCollector submitNodeCollector,
             @NotNull CameraRenderState cameraRenderState) {
         submitNodeCollector.submitCustomGeometry(
-                poseStack,
-                renderType(),
-                (pose, vertices) -> renderSides(pose.pose(), vertices));
+                poseStack, RenderTypes.endPortal(), (pose, vertices) -> renderSides(pose.pose(), vertices));
     }
 
     private void renderSides(Matrix4f pose, VertexConsumer vertices) {

@@ -1,6 +1,7 @@
 package net.anvian.gofish.impl;
 
-import net.anvian.gofish.GoFish;
+import net.anvian.anvianslib.util.RegistryUtil;
+import net.anvian.gofish.GoFishConstants;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -13,6 +14,6 @@ public class GoFishLootTables {
     public static final ResourceKey<LootTable> END_FISHING = key("gameplay/fishing/end/fishing");
 
     private static ResourceKey<LootTable> key(String path) {
-        return ResourceKey.create(Registries.LOOT_TABLE, GoFish.id(path));
+        return RegistryUtil.key(Registries.LOOT_TABLE, GoFishConstants.MOD_ID, path);
     }
 }

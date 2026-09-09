@@ -1,5 +1,7 @@
 package net.anvian.gofish.item;
 
+import net.anvian.anvianslib.util.RegistryUtil;
+import net.anvian.anvianslib.util.TimeUtil;
 import net.anvian.gofish.api.ExperienceBobber;
 import net.anvian.gofish.api.FireproofEntity;
 import net.anvian.gofish.api.SmeltingBobber;
@@ -10,7 +12,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -56,7 +57,7 @@ public class ExtendedFishingRodItem extends FishingRodItem {
     @Override
     public @NotNull InteractionResult use(Level world, Player user, @NotNull InteractionHand hand) {
         ItemStack heldStack = user.getItemInHand(hand);
-        RandomSource random = world.random;
+        RandomSource random = world.getRandom();
 
         if (user.fishing != null) {
             handleRetrieve(world, user, hand, heldStack, random);
@@ -110,7 +111,7 @@ public class ExtendedFishingRodItem extends FishingRodItem {
         boolean smelts = shouldSmelt(serverWorld, heldStack, bonuses.smeltBuff());
 
         int lure = Math.min(
-                (int) (EnchantmentHelper.getFishingTimeReduction(serverWorld, heldStack, user) * 20.0F)
+                TimeUtil.secondsToTicks(EnchantmentHelper.getFishingTimeReduction(serverWorld, heldStack, user))
                         + config.baseLure
                         + bonuses.lure(),
                 5);
@@ -184,7 +185,7 @@ public class ExtendedFishingRodItem extends FishingRodItem {
 
         public Builder(Identifier id) {
             this.settings = new Item.Properties()
-                    .setId(ResourceKey.create(Registries.ITEM, id))
+                    .setId(RegistryUtil.key(Registries.ITEM, id.getNamespace(), id.getPath()))
                     .durability(100)
                     .enchantable(1);
         }

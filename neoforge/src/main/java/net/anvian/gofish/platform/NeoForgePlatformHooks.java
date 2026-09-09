@@ -1,5 +1,7 @@
 package net.anvian.gofish.platform;
 
+import net.anvian.gofish.GoFish;
+import net.anvian.gofish.GoFishConstants;
 import net.anvian.gofish.block.AstralCrateBlock;
 import net.anvian.gofish.command.FishCommand;
 import net.anvian.gofish.entity.block.AstralCrateBlockEntity;
@@ -10,10 +12,11 @@ import net.anvian.gofish.registry.GoFishEntities;
 import net.anvian.gofish.registry.GoFishItems;
 import net.anvian.gofish.registry.GoFishLootHandler;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Block;
@@ -21,6 +24,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
@@ -58,6 +62,7 @@ public final class NeoForgePlatformHooks implements IPlatformHooks {
         NeoForge.EVENT_BUS.addListener(this::registerFuel);
 
         NeoForge.EVENT_BUS.addListener(this::registerBrewingRecipes);
+        modEventBus.addListener(NeoForgePlatformHooks::buildCreativeTab);
     }
 
     @SuppressWarnings({"ConstantConditions"})
@@ -109,6 +114,12 @@ public final class NeoForgePlatformHooks implements IPlatformHooks {
         builder.addMix(Potions.AWKWARD, GoFishItems.CHARFISH.get(), Potions.WEAKNESS);
         builder.addMix(Potions.AWKWARD, GoFishItems.RAINY_BASS.get(), Potions.WATER_BREATHING);
         builder.addMix(Potions.AWKWARD, GoFishItems.MAGMA_COD.get(), Potions.FIRE_RESISTANCE);
+    }
+
+    private static void buildCreativeTab(BuildCreativeModeTabContentsEvent event) {
+        if (GoFishConstants.ITEM_GROUP.equals(event.getTabKey())) {
+            GoFish.addCreativeItems(item -> event.accept(new ItemStack(item)));
+        }
     }
 
     @Override

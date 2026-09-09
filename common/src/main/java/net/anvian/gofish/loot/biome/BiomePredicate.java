@@ -2,6 +2,7 @@ package net.anvian.gofish.loot.biome;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.anvian.anvianslib.util.RegistryUtil;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -37,6 +38,10 @@ public record BiomePredicate(List<ResourceKey<Biome>> valid) {
         return false;
     }
 
+    private static ResourceKey<Biome> key(Identifier identifier) {
+        return RegistryUtil.key(Registries.BIOME, identifier.getNamespace(), identifier.getPath());
+    }
+
     public static class Builder {
 
         private List<ResourceKey<Biome>> valid;
@@ -53,8 +58,8 @@ public record BiomePredicate(List<ResourceKey<Biome>> valid) {
         public Builder setValidFromString(List<String> valid) {
             List<ResourceKey<Biome>> rKeys = new ArrayList<>();
             for (String str : valid) {
-                if (!valid.isEmpty()) {
-                    rKeys.add(ResourceKey.create(Registries.BIOME, Identifier.parse(str)));
+                if (!str.isEmpty()) {
+                    rKeys.add(key(Identifier.parse(str)));
                 }
             }
 
@@ -68,7 +73,7 @@ public record BiomePredicate(List<ResourceKey<Biome>> valid) {
 
         public Builder add(String biome) {
             if (!biome.isEmpty()) {
-                valid.add(ResourceKey.create(Registries.BIOME, Identifier.parse(biome)));
+                valid.add(key(Identifier.parse(biome)));
             }
 
             return this;

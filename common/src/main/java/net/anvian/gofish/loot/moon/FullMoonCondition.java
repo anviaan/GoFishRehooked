@@ -2,7 +2,6 @@ package net.anvian.gofish.loot.moon;
 
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.MapCodec;
-import net.anvian.gofish.registry.GoFishLoot;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.Entity;
@@ -10,7 +9,6 @@ import net.minecraft.world.level.MoonPhase;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
@@ -21,8 +19,8 @@ public record FullMoonCondition() implements LootItemCondition {
     public static final MapCodec<FullMoonCondition> CODEC = MapCodec.unit(INSTANCE);
 
     @Override
-    public @NotNull LootItemConditionType getType() {
-        return GoFishLoot.FULL_MOON.get();
+    public @NotNull MapCodec<FullMoonCondition> codec() {
+        return CODEC;
     }
 
     @Override

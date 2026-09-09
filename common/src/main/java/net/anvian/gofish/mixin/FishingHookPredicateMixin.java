@@ -1,7 +1,7 @@
 package net.anvian.gofish.mixin;
 
 import net.anvian.gofish.util.PermissionChecks;
-import net.minecraft.advancements.criterion.FishingHookPredicate;
+import net.minecraft.advancements.predicates.entity.FishingHookPredicate;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;

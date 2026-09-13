@@ -36,7 +36,10 @@ public final class FabricPlatformHooks implements IPlatformHooks {
 
         CommandRegistrationCallback.EVENT.register(FabricPlatformHooks::registerCommands);
         CreativeModeTabEvents.modifyOutputEvent(GoFishConstants.ITEM_GROUP)
-                .register(output -> GoFish.addCreativeItems(output::accept));
+                .register(output -> {
+                    GoFish.addCreativeItems(output::accept);
+                    GoFish.addDeepfryBook(output::accept, output.getContext().holders());
+                });
         LootTableEvents.MODIFY.register((id, tableBuilder, source, _) -> {
             if (BuiltInLootTables.FISHING_FISH.equals(id) && source.isBuiltin()) {
                 tableBuilder.modifyPools(GoFishLootHandler::addFishEntries);

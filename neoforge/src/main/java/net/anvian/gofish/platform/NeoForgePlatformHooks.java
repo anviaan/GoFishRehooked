@@ -119,6 +119,7 @@ public final class NeoForgePlatformHooks implements IPlatformHooks {
     private static void buildCreativeTab(BuildCreativeModeTabContentsEvent event) {
         if (GoFishConstants.ITEM_GROUP.equals(event.getTabKey())) {
             GoFish.addCreativeItems(item -> event.accept(new ItemStack(item)));
+            GoFish.addDeepfryBook(event::accept, event.getParameters().holders());
         }
     }
 

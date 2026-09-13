@@ -1,1 +1,2 @@
-- Port to 1.21.10 with support for Minecraft [1.21.9, 1.21.10]
+- Added the Deepfry enchanted book to the Creative menu.
+- Fixed an issue where the mod's fishing rods could not be enchanted correctly.

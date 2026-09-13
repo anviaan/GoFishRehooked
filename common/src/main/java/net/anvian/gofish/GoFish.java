@@ -9,6 +9,7 @@ import net.anvian.gofish.registry.GoFishEntities;
 import net.anvian.gofish.registry.GoFishItems;
 import net.anvian.gofish.registry.GoFishLoot;
 import net.anvian.gofish.registry.GoFishParticles;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -17,6 +18,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.slf4j.Logger;
@@ -67,6 +69,12 @@ public final class GoFish {
                         .build());
 
         hooks.registerPlatformHooks();
+    }
+
+    public static void addDeepfryBook(Consumer<ItemStack> add, HolderLookup.Provider holders) {
+        ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
+        book.enchant(GoFishEnchantments.getDeepfryHolder(holders), 1);
+        add.accept(book);
     }
 
     public static void addCreativeItems(Consumer<ItemLike> add) {

@@ -15,8 +15,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.level.block.Block;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,6 +72,9 @@ public final class GoFish {
                                 output.accept(BuiltInRegistries.ITEM.get(itemId));
                                 orderedItems.add(itemId);
                             });
+
+                            output.accept(EnchantedBookItem.createForEnchantment(
+                                    new EnchantmentInstance(GoFishEnchantments.DEEPFRY.get(), 1)));
 
                             BuiltInRegistries.ITEM.entrySet().stream()
                                     .filter(entry -> GoFishConstants.MOD_ID.equals(

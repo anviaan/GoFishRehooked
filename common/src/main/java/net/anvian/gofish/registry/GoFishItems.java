@@ -22,6 +22,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 @SuppressWarnings(value = "unused")
 public class GoFishItems {
@@ -176,11 +177,11 @@ public class GoFishItems {
                             .build())));
     public static final PlatformRegistryObject<Item> OAKFISH = register(
             "oakfish",
-            () -> new Item(itemProperties("oakfish")
+            () -> new Item(itemProperties("oakfish").cookingFuel(ContextIntProviders.COOKING_TIME_WOOD_BLOCKS)
                     .food(new FoodProperties.Builder().nutrition(3).build())));
     public static final PlatformRegistryObject<Item> CHARFISH = register(
             "charfish",
-            () -> new Item(itemProperties("charfish")
+            () -> new Item(itemProperties("charfish").cookingFuel(ContextIntProviders.COOKING_TIME_COAL)
                     .food(
                             new FoodProperties.Builder().nutrition(2).build(),
                             foodWithEffect(new MobEffectInstance(MobEffects.BLINDNESS, 20 * 5, 0), 1.0F))));

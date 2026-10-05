@@ -2,6 +2,7 @@
   "pools": [
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 1,
         "max": 3
       },
@@ -10,10 +11,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:snow_block",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -24,10 +26,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:snowball",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 16
               }
@@ -38,10 +41,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:snow",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -52,21 +56,25 @@
     },
     {
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "random_chance",
-          "chance": 0.5
-        }
-      ],
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:random_chance",
+            "chance": 0.5
+          }
+        ]
+      },
       "entries": [
         {
           "type": "minecraft:item",
           "weight": 1,
           "name": "gofish:snowball_fish",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -77,10 +85,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "gofish:icicle_fish",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -91,12 +100,15 @@
     },
     {
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "random_chance",
-          "chance": 0.5
-        }
-      ],
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:random_chance",
+            "chance": 0.5
+          }
+        ]
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -107,14 +119,14 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "gofish:frosted_rod",
-          "functions": [
+          "modifier": [
             {
-              "function": "enchant_with_levels",
+              "type": "minecraft:enchant_with_levels",
               "levels": {
+                "type": "minecraft:uniform",
                 "min": 15,
                 "max": 25
-              },
-              "treasure": true
+              }
             }
           ]
         },
@@ -122,11 +134,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:book",
-          "functions": [
+          "modifier": [
             {
-              "function": "enchant_randomly",
-              "enchantments": [
-                "frost_walker"
+              "type": "minecraft:enchant_randomly",
+              "options": [
+                "minecraft:frost_walker"
               ]
             }
           ]
@@ -135,6 +147,7 @@
     },
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 1,
         "max": 3
       },
@@ -143,10 +156,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:packed_ice",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -157,10 +171,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:ice",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -171,10 +186,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:blue_ice",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -190,10 +206,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:iron_ore",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -204,10 +221,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:coal_ore",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -218,10 +236,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:coal",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -232,10 +251,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:iron_ingot",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -246,10 +266,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:charcoal",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -265,6 +286,7 @@
     },
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 1,
         "max": 2
       },
@@ -273,10 +295,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:spruce_planks",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -287,10 +310,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:spruce_log",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }

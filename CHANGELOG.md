@@ -1,2 +1,1 @@
-- Added the Deepfry enchanted book to the Creative menu.
-- Fixed an issue where the mod's fishing rods could not be enchanted correctly.
+- Added support for Minecraft 26.3.

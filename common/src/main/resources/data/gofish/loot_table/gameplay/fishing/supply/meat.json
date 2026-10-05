@@ -2,6 +2,7 @@
   "pools": [
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 3,
         "max": 6
       },
@@ -10,10 +11,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:porkchop",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 3,
                 "max": 6
               }
@@ -24,10 +26,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:beef",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 3,
                 "max": 6
               }
@@ -38,10 +41,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:chicken",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 3,
                 "max": 6
               }
@@ -52,10 +56,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:rabbit",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 3,
                 "max": 6
               }
@@ -66,10 +71,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:mutton",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 3,
                 "max": 6
               }

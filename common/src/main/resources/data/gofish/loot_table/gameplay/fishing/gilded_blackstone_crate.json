@@ -2,6 +2,7 @@
   "pools": [
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 1,
         "max": 2
       },
@@ -10,10 +11,11 @@
           "type": "minecraft:item",
           "weight": 7,
           "name": "minecraft:blackstone",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 12
               }
@@ -24,10 +26,11 @@
           "type": "minecraft:item",
           "weight": 3,
           "name": "minecraft:polished_blackstone_bricks",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 12
               }
@@ -38,10 +41,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:chiseled_polished_blackstone",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 4
               }
@@ -52,6 +56,7 @@
     },
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 1,
         "max": 2
       },
@@ -60,10 +65,11 @@
           "type": "minecraft:item",
           "weight": 30,
           "name": "gofish:gilded_blackstone_carp",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 6
               }
@@ -74,10 +80,11 @@
           "type": "minecraft:item",
           "weight": 30,
           "name": "gofish:blackstone_trout",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 6
               }
@@ -93,10 +100,11 @@
           "type": "minecraft:item",
           "weight": 5,
           "name": "gofish:spikerfish",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 3
               }
@@ -107,10 +115,11 @@
           "type": "minecraft:item",
           "weight": 10,
           "name": "gofish:smokey_salmon",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 4
               }
@@ -121,10 +130,11 @@
           "type": "minecraft:item",
           "weight": 10,
           "name": "gofish:basalt_bass",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 4
               }
@@ -145,10 +155,11 @@
           "type": "minecraft:item",
           "weight": 15,
           "name": "minecraft:gold_ingot",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 12
               }
@@ -159,10 +170,11 @@
           "type": "minecraft:item",
           "weight": 10,
           "name": "minecraft:gold_nugget",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 32
               }
@@ -173,21 +185,25 @@
     },
     {
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "random_chance",
-          "chance": 0.25
-        }
-      ],
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:random_chance",
+            "chance": 0.25
+          }
+        ]
+      },
       "entries": [
         {
           "type": "minecraft:item",
           "weight": 5,
           "name": "minecraft:gilded_blackstone",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -198,10 +214,11 @@
           "type": "minecraft:item",
           "weight": 5,
           "name": "minecraft:nether_gold_ore",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 4
               }
@@ -212,10 +229,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:gold_ore",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 4
               }
@@ -226,12 +244,15 @@
     },
     {
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "random_chance",
-          "chance": 0.5
-        }
-      ],
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:random_chance",
+            "chance": 0.5
+          }
+        ]
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -242,10 +263,11 @@
           "type": "minecraft:item",
           "weight": 8,
           "name": "minecraft:golden_apple",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 6
               }

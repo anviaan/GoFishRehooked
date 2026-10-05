@@ -44,7 +44,7 @@ public abstract class FishingBobberLootMixin extends Entity {
             return this.level().getServer().reloadableRegistries().getLootTable(GoFishLootTables.NETHER_FISHING);
         } else if (level().environmentAttributes()
                 .getValue(EnvironmentAttributes.BED_RULE, blockPosition())
-                .explodes()) {
+                .destroyOnUse()) {
             return this.level().getServer().reloadableRegistries().getLootTable(GoFishLootTables.END_FISHING);
         }
 

@@ -30,7 +30,7 @@ public record FullMoonCondition() implements LootItemCondition {
 
     @Override
     public boolean test(LootContext lootContext) {
-        Entity entity = lootContext.getOptionalParameter(LootContextParams.THIS_ENTITY);
+        Entity entity = lootContext.getOptional(LootContextParams.THIS_ENTITY);
 
         if (entity != null) {
             return entity.level().isDarkOutside()

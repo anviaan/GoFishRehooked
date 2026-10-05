@@ -52,7 +52,7 @@ public class FishCommand {
             table = world.getServer().reloadableRegistries().getLootTable(GoFishLootTables.NETHER_FISHING);
         } else if (world.environmentAttributes()
                 .getValue(EnvironmentAttributes.BED_RULE, player.blockPosition())
-                .explodes()) {
+                .destroyOnUse()) {
             table = world.getServer().reloadableRegistries().getLootTable(GoFishLootTables.END_FISHING);
         } else {
             table = world.getServer().reloadableRegistries().getLootTable(GoFishLootTables.OVERWORLD_FISHING);

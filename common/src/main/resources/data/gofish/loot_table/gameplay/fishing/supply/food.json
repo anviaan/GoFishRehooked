@@ -2,6 +2,7 @@
   "pools": [
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 3,
         "max": 6
       },
@@ -10,10 +11,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:mushroom_stew",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 2
               }
@@ -24,10 +26,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:bread",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 3,
                 "max": 6
               }
@@ -38,10 +41,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:cooked_porkchop",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 3,
                 "max": 6
               }
@@ -52,10 +56,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:cooked_cod",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 3,
                 "max": 6
               }
@@ -66,10 +71,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:cooked_salmon",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 3,
                 "max": 6
               }
@@ -80,10 +86,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:cooked_chicken",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 3,
                 "max": 6
               }
@@ -94,10 +101,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:cooked_beef",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 3,
                 "max": 6
               }
@@ -108,10 +116,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:baked_potato",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 3,
                 "max": 6
               }
@@ -122,10 +131,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:cooked_rabbit",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 3,
                 "max": 6
               }
@@ -136,10 +146,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:pumpkin_pie",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 3,
                 "max": 6
               }
@@ -150,10 +161,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:cooked_mutton",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 3,
                 "max": 6
               }
@@ -164,10 +176,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:rabbit_stew",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 3,
                 "max": 6
               }

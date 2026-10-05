@@ -2,6 +2,7 @@
   "pools": [
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 1,
         "max": 3
       },
@@ -10,10 +11,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:iron_ingot",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 16
               }
@@ -24,10 +26,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:gold_ingot",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 16
               }
@@ -38,10 +41,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:diamond",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 4
               }
@@ -52,10 +56,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:emerald",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 4
               }
@@ -66,6 +71,7 @@
     },
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 1,
         "max": 3
       },
@@ -74,10 +80,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:iron_nugget",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 16
               }
@@ -88,10 +95,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:gold_nugget",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 16
               }
@@ -102,10 +110,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:lapis_lazuli",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 16
               }
@@ -116,10 +125,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:redstone",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 16
               }
@@ -130,10 +140,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:coal",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 16
               }
@@ -149,10 +160,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:cod",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -163,10 +175,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:salmon",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -177,10 +190,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:tropical_fish",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 6
               }
@@ -191,10 +205,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:pufferfish",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 3
               }
@@ -205,6 +220,7 @@
     },
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 0,
         "max": 1
       },
@@ -213,10 +229,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:book",
-          "functions": [
+          "modifier": [
             {
-              "function": "enchant_with_levels",
+              "type": "minecraft:enchant_with_levels",
               "levels": {
+                "type": "minecraft:uniform",
                 "min": 15,
                 "max": 25
               }
@@ -247,10 +264,11 @@
           "type": "minecraft:item",
           "weight": 8,
           "name": "minecraft:experience_bottle",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 16
               }

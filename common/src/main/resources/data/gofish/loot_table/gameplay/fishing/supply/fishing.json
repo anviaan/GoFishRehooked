@@ -2,6 +2,7 @@
   "pools": [
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 3,
         "max": 6
       },
@@ -10,10 +11,11 @@
           "type": "minecraft:item",
           "weight": 10,
           "name": "minecraft:cod",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 2,
                 "max": 6
               }
@@ -24,10 +26,11 @@
           "type": "minecraft:item",
           "weight": 10,
           "name": "minecraft:salmon",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 2,
                 "max": 6
               }
@@ -48,10 +51,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "gofish:carrot_carp",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 2,
                 "max": 6
               }
@@ -62,10 +66,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "gofish:oakfish",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 5
               }
@@ -76,6 +81,7 @@
     },
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 0,
         "max": 1
       },
@@ -84,10 +90,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:fishing_rod",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_damage",
+              "type": "minecraft:set_damage",
               "damage": {
+                "type": "minecraft:uniform",
                 "min": 0,
                 "max": 0.2
               }

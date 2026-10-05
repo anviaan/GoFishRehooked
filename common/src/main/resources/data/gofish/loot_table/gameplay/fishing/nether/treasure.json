@@ -14,47 +14,46 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_damage",
+              "type": "minecraft:set_damage",
               "damage": {
+                "type": "minecraft:uniform",
                 "min": 0.0,
                 "max": 0.25
               }
             },
             {
-              "function": "minecraft:enchant_with_levels",
-              "levels": 30,
-              "treasure": true
+              "type": "minecraft:enchant_with_levels",
+              "levels": 30
             }
           ],
           "name": "minecraft:bow"
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_damage",
+              "type": "minecraft:set_damage",
               "damage": {
+                "type": "minecraft:uniform",
                 "min": 0.0,
                 "max": 0.25
               }
             },
             {
-              "function": "minecraft:enchant_with_levels",
-              "levels": 30,
-              "treasure": true
+              "type": "minecraft:enchant_with_levels",
+              "levels": 30
             }
           ],
           "name": "minecraft:fishing_rod"
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:enchant_with_levels",
-              "levels": 30,
-              "treasure": true
+              "type": "minecraft:enchant_with_levels",
+              "levels": 30
             }
           ],
           "name": "minecraft:book"

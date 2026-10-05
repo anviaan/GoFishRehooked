@@ -9,7 +9,6 @@ import net.anvian.gofish.item.CrateItem;
 import net.anvian.gofish.item.NeoForgeAstralCrateItem;
 import net.anvian.gofish.registry.GoFishBlocks;
 import net.anvian.gofish.registry.GoFishEntities;
-import net.anvian.gofish.registry.GoFishItems;
 import net.anvian.gofish.registry.GoFishLootHandler;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
@@ -17,8 +16,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.PotionBrewing;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
@@ -27,8 +24,6 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
-import net.neoforged.neoforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 import java.util.ArrayList;
@@ -59,9 +54,6 @@ public final class NeoForgePlatformHooks implements IPlatformHooks {
         modEventBus.addListener(this::registerObjects);
         NeoForge.EVENT_BUS.addListener(this::registerCommands);
         NeoForge.EVENT_BUS.addListener(this::modifyLootTable);
-        NeoForge.EVENT_BUS.addListener(this::registerFuel);
-
-        NeoForge.EVENT_BUS.addListener(this::registerBrewingRecipes);
         modEventBus.addListener(NeoForgePlatformHooks::buildCreativeTab);
     }
 
@@ -98,22 +90,6 @@ public final class NeoForgePlatformHooks implements IPlatformHooks {
         if (BuiltInLootTables.FISHING_FISH.equals(event.getName())) {
             GoFishLootHandler.addFishEntries(event.getTable());
         }
-    }
-
-    private void registerFuel(FurnaceFuelBurnTimeEvent event) {
-        if (event.getItemStack().is(GoFishItems.OAKFISH.get())) {
-            event.setBurnTime(300);
-        } else if (event.getItemStack().is(GoFishItems.CHARFISH.get())) {
-            event.setBurnTime(1600);
-        }
-    }
-
-    private void registerBrewingRecipes(RegisterBrewingRecipesEvent event) {
-        PotionBrewing.Builder builder = event.getBuilder();
-        builder.addMix(Potions.AWKWARD, GoFishItems.CLOUDY_CRAB.get(), Potions.SLOW_FALLING);
-        builder.addMix(Potions.AWKWARD, GoFishItems.CHARFISH.get(), Potions.WEAKNESS);
-        builder.addMix(Potions.AWKWARD, GoFishItems.RAINY_BASS.get(), Potions.WATER_BREATHING);
-        builder.addMix(Potions.AWKWARD, GoFishItems.MAGMA_COD.get(), Potions.FIRE_RESISTANCE);
     }
 
     private static void buildCreativeTab(BuildCreativeModeTabContentsEvent event) {

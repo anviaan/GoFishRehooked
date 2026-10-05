@@ -32,10 +32,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:book",
-          "functions": [
+          "modifier": [
             {
-              "function": "enchant_with_levels",
+              "type": "minecraft:enchant_with_levels",
               "levels": {
+                "type": "minecraft:uniform",
                 "min": 20,
                 "max": 30
               }

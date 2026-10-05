@@ -2,6 +2,7 @@
   "pools": [
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 3,
         "max": 5
       },
@@ -15,12 +16,15 @@
     },
     {
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "random_chance",
-          "chance": 0.25
-        }
-      ],
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:random_chance",
+            "chance": 0.25
+          }
+        ]
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -31,10 +35,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "gofish:ender_rod",
-          "functions": [
+          "modifier": [
             {
-              "function": "enchant_with_levels",
+              "type": "minecraft:enchant_with_levels",
               "levels": {
+                "type": "minecraft:uniform",
                 "min": 15,
                 "max": 25
               }
@@ -50,10 +55,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "gofish:matrix_rod",
-          "functions": [
+          "modifier": [
             {
-              "function": "enchant_with_levels",
+              "type": "minecraft:enchant_with_levels",
               "levels": {
+                "type": "minecraft:uniform",
                 "min": 15,
                 "max": 25
               }
@@ -74,6 +80,7 @@
     },
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 0,
         "max": 1
       },
@@ -82,10 +89,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:obsidian",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -96,10 +104,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:crying_obsidian",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 8
               }
@@ -110,10 +119,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:end_stone",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 16
               }

@@ -2,6 +2,7 @@
   "pools": [
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 1,
         "max": 2
       },
@@ -10,10 +11,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:quartz",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 12
               }
@@ -24,10 +26,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:gold_ingot",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 4
               }
@@ -38,10 +41,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:gold_nugget",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 16
               }
@@ -52,10 +56,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:blaze_rod",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 2
               }
@@ -66,6 +71,7 @@
     },
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 1,
         "max": 2
       },
@@ -84,10 +90,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:bone",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 3
               }
@@ -98,10 +105,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:magma_cream",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 3
               }
@@ -112,10 +120,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:nether_wart",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 3
               }
@@ -126,6 +135,7 @@
     },
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 1,
         "max": 2
       },
@@ -134,10 +144,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:netherrack",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 12
               }
@@ -148,10 +159,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:nether_bricks",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 12
               }
@@ -162,10 +174,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:soul_sand",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 12
               }
@@ -176,10 +189,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:gravel",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 12
               }
@@ -190,12 +204,15 @@
     },
     {
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "random_chance",
-          "chance": 0.2
-        }
-      ],
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:random_chance",
+            "chance": 0.2
+          }
+        ]
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -211,10 +228,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "gofish:blaze_rod",
-          "functions": [
+          "modifier": [
             {
-              "function": "enchant_with_levels",
+              "type": "minecraft:enchant_with_levels",
               "levels": {
+                "type": "minecraft:uniform",
                 "min": 15,
                 "max": 25
               }
@@ -225,10 +243,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "gofish:skeletal_rod",
-          "functions": [
+          "modifier": [
             {
-              "function": "enchant_with_levels",
+              "type": "minecraft:enchant_with_levels",
               "levels": {
+                "type": "minecraft:uniform",
                 "min": 15,
                 "max": 25
               }
@@ -239,12 +258,15 @@
     },
     {
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "random_chance",
-          "chance": 0.1
-        }
-      ],
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ]
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -265,6 +287,7 @@
     },
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 0,
         "max": 2
       },
@@ -278,10 +301,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "gofish:smokey_salmon",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 3
               }
@@ -292,10 +316,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "gofish:magma_cod",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 3
               }
@@ -306,10 +331,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "gofish:obsidian_halibut",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 3
               }
@@ -320,10 +346,11 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "gofish:basalt_bass",
-          "functions": [
+          "modifier": [
             {
-              "function": "set_count",
+              "type": "minecraft:set_count",
               "count": {
+                "type": "minecraft:uniform",
                 "min": 1,
                 "max": 3
               }

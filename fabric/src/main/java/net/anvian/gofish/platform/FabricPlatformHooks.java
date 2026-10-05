@@ -7,14 +7,12 @@ import net.anvian.gofish.command.FishCommand;
 import net.anvian.gofish.entity.block.AstralCrateBlockEntity;
 import net.anvian.gofish.item.CrateItem;
 import net.anvian.gofish.registry.GoFishEntities;
-import net.anvian.gofish.registry.GoFishItems;
 import net.anvian.gofish.registry.GoFishLootHandler;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.entity.FakePlayer;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.fabricmc.fabric.api.registry.FuelValueEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
@@ -44,11 +42,6 @@ public final class FabricPlatformHooks implements IPlatformHooks {
             if (BuiltInLootTables.FISHING_FISH.equals(id) && source.isBuiltin()) {
                 tableBuilder.modifyPools(GoFishLootHandler::addFishEntries);
             }
-        });
-
-        FuelValueEvents.BUILD.register((builder, _) -> {
-            builder.add(GoFishItems.OAKFISH.get(), 300);
-            builder.add(GoFishItems.CHARFISH.get(), 1600);
         });
     }
 
